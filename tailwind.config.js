@@ -16,6 +16,13 @@ export default {
       'sans': ['Inter', 'sans-serif'],
     },
 
+    colors: {
+      blue: {
+        700: '#096BD9',
+        800: '#095FC0',
+      },
+    },
+
     extend: {},
   },
 
