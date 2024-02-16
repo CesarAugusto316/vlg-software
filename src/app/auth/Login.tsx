@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons/faMicrosoft';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AuthWrapper } from './Section';
-import { LogoTitle } from './LogoTitle';
+import { AuthWrapper } from './components/Section';
+import { LogoTitle } from './components/LogoTitle';
 import { Link } from 'react-router-dom';
 
 

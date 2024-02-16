@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import vlgLogo from '../../assets/icons/vlg-logo.png';
+import vlgLogo from '../../../assets/icons/vlg-logo.png';
 
 
 export const LogoTitle: FC = () => {
