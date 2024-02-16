@@ -1,8 +1,6 @@
 import { FC } from 'react';
 import { AuthWrapper } from './Section';
 import { LogoTitle } from './LogoTitle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrosoft } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 
 
@@ -10,7 +8,7 @@ export const Register: FC = () => {
   return (
     <AuthWrapper>
 
-      <form className=" form-container -mt-4 w-[672px]">
+      <form className=" form-container -mt-4 w-[680px] flex flex-col gap-4">
         <ul className="flex flex-col gap-4">
           <li>
             <LogoTitle />
@@ -20,17 +18,38 @@ export const Register: FC = () => {
             <h2>Crea tu cuenta</h2>
             <p>Ingresa tus datos para comenzar</p>
           </li>
+        </ul>
+
+        <ul className="grid grid-cols-2 gap-x-8 gap-y-4">
 
           <li>
-            <button type="button" className="btn-light">
-              <FontAwesomeIcon size="lg" icon={faMicrosoft} />
-              <span>Ingresar con Microsoft</span>
-            </button>
+            <label htmlFor="name" className="input-label">Nombres</label>
+            <input
+              id="name"
+              className="input-primary"
+              placeholder="Ingresa tus nombres"
+              required
+            />
           </li>
 
-          <li className="flex items-center justify-between">
-            <p>También puedes ingresar usando:</p>
-            <hr className="w-1/3" />
+          <li>
+            <label htmlFor="lastname" className="input-label">Apellidos</label>
+            <input
+              id="lastname"
+              className="input-primary"
+              placeholder="Ingresa tus apellidos"
+              required
+            />
+          </li>
+
+          <li>
+            <label htmlFor="rut" className="input-label">Rut</label>
+            <input
+              id="rut"
+              className="input-primary"
+              placeholder="Sin puntos ni guión"
+              required
+            />
           </li>
 
           <li>
@@ -55,25 +74,24 @@ export const Register: FC = () => {
             />
           </li>
 
-          <li className="flex items-center">
-            <div className="flex items-center h-5">
-              <input
-                id="remember"
-                type="checkbox"
-                value=""
-                className="checkbox-primary"
-                required
-              />
-            </div>
-            <label htmlFor="remember" className="checkbox-label">Recordarme</label>
+          <li>
+            <label htmlFor="re-password" className="input-label">Confirmar contraseña</label>
+            <input
+              type="password"
+              id="re-password"
+              className="input-primary"
+              placeholder="Repite tu contraseña"
+              required
+            />
           </li>
+        </ul>
 
-          <li className="mt-2">
+        <ul className="flex flex-col gap-2 mt-5 w-2/3 mx-auto">
+          <li>
             <button
-              type="submit"
               className="btn-primary"
             >
-              Ingresar
+              Continuar
             </button>
           </li>
 
@@ -81,7 +99,6 @@ export const Register: FC = () => {
             <Link className="btn-light-no-border" to="/login">Volver al Login</Link>
           </li>
         </ul>
-
       </form>
     </AuthWrapper>
   );
