@@ -22,15 +22,24 @@ export default {
         600: '#095FC0',
         900: '#313181'
       },
+
       'gray-vlg': {
         100: '#F4F7FA',
         200: '#E5EBF2',
         300: '#C5CFDB',
         400: '#707280'
-      }
+      },
+
+      'red-vlg': {
+        500: '#EF4444',
+      },
     },
 
-    extend: {},
+    // fontColor: '#707280',
+
+    extend: {
+      // 'text-gray-900': '#707280',
+    },
   },
 
   plugins: [
