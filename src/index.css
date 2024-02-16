@@ -6,7 +6,7 @@
 
 @layer base {
   html {
-    @apply font-sans text-gray-vlg-400;
+    @apply font-sans text-gray-vlg-400 dark:text-white;
   }
 
   p,
@@ -24,7 +24,31 @@
 }
 
 @layer components {
-  /* .btn-blue {
-    @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
-  } */
+  .btn-light {
+    @apply hover:text-blue-vlg-600 gap-2 flex items-center justify-center shadow-sm w-full bg-white border border-gray-vlg-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5   dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700;
+  }
+
+  .btn-primary {
+    @apply w-full text-white bg-blue-vlg-500 hover:bg-blue-vlg-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center;
+  }
+
+  .checkbox-primary {
+    @apply checked:bg-blue-vlg-900 w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-2 focus:ring-blue-vlg-600/30 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800;
+  }
+
+  .checkbox-label {
+    @apply ms-2 text-sm font-medium dark:text-gray-300;
+  }
+
+  .input-primary {
+    @apply shadow-sm bg-white border text-sm  border-gray-vlg-300 font-medium  rounded-lg focus:ring-blue-vlg-900 focus:border-blue-vlg-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light placeholder:italic placeholder-gray-vlg-400/80;
+  }
+
+  .input-label {
+    @apply block mb-2 text-sm font-medium  dark:text-white;
+  }
+
+  .form-container {
+    @apply bg-white p-8 rounded-xl border-gray-vlg-100 border-2;
+  }
 }
