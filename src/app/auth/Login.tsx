@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 export const Login: FC = () => {
   return (
     <AuthWrapper>
-      <form className="-mt-4 w-[448px] form-container">
+      <form className=" form-container -mt-4 w-[448px]">
         <ul className="flex flex-col gap-4">
           <li>
             <LogoTitle />

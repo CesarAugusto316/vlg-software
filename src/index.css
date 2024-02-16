@@ -28,6 +28,10 @@
     @apply hover:text-blue-vlg-600 gap-2 flex items-center justify-center shadow-sm w-full bg-white border border-gray-vlg-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5   dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700;
   }
 
+  .btn-light-no-border {
+    @apply hover:text-blue-vlg-600 gap-2 flex items-center justify-center w-full bg-white  focus:outline-none hover:bg-gray-100 font-medium rounded-lg px-5 py-2.5   dark:bg-gray-800 dark:text-white  dark:hover:bg-gray-700;
+  }
+
   .btn-primary {
     @apply w-full text-white bg-blue-vlg-500 hover:bg-blue-vlg-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center;
   }
