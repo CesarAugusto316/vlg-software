@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import vlgLogo from '../../assets/icons/vlg-logo.png';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons/faMicrosoft';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthWrapper } from './Section';
+import { LogoTitle } from './LogoTitle';
+import { Link } from 'react-router-dom';
 
 
 export const Login: FC = () => {
@@ -10,18 +11,13 @@ export const Login: FC = () => {
     <AuthWrapper>
       <form className="-mt-4 w-[448px] form-container">
         <ul className="flex flex-col gap-4">
-          <li className="flex items-center gap-2">
-            <img
-              className="w-11 h-11 shadow-md-light"
-              src={vlgLogo}
-              alt="vlg-logo"
-            />
-            <h2 className="text-blue-vlg-900 ">VLG Software</h2>
+          <li>
+            <LogoTitle />
           </li>
 
           <li>
             <h2>Bienvenido!</h2>
-            <p>No tienes cuenta VLG? <a href="#" >Crea una ahora</a></p>
+            <p>No tienes cuenta VLG? <Link to={'/register'}>Crea una ahora</Link></p>
           </li>
 
           <li>
