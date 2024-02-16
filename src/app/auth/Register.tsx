@@ -25,6 +25,7 @@ export const Register: FC = () => {
           <li>
             <label htmlFor="name" className="input-label">Nombres</label>
             <input
+              type="text"
               id="name"
               className="input-primary"
               placeholder="Ingresa tus nombres"
@@ -35,6 +36,7 @@ export const Register: FC = () => {
           <li>
             <label htmlFor="lastname" className="input-label">Apellidos</label>
             <input
+              type="text"
               id="lastname"
               className="input-primary"
               placeholder="Ingresa tus apellidos"
@@ -45,6 +47,7 @@ export const Register: FC = () => {
           <li>
             <label htmlFor="rut" className="input-label">Rut</label>
             <input
+              type="text"
               id="rut"
               className="input-primary"
               placeholder="Sin puntos ni guión"
