@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { AuthWrapper } from './components/Section';
 import { LogoTitle } from './components/LogoTitle';
-import { Form, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../components/FieldWithErrorMessage';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik, FormikHelpers, Form } from 'formik';
 import * as Yup from 'yup';
 
 
@@ -22,7 +22,10 @@ const validationSchema = Yup.object<FormValues>({
   rut: Yup.string().required('Ingresa tu RUT'),
   email: Yup.string().email('Ingresa un correo válido').required('Ingresa tu correo'),
   password: Yup.string().min(6).required('Ingresa tu contraseña'),
-  rePassword: Yup.string().oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden').required('Repite tu contraseña'),
+  rePassword:
+    Yup.string()
+      .oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden')
+      .required('Repite tu contraseña'),
 });
 
 
