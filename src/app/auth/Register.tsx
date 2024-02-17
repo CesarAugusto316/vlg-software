@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { AuthWrapper } from './components/Section';
+import { AuthContainer } from './components/AuthContainer';
 import { LogoTitle } from './components/LogoTitle';
 import { Link } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../components/FieldWithErrorMessage';
@@ -47,7 +47,7 @@ export const Register: FC = () => {
   };
 
   return (
-    <AuthWrapper>
+    <AuthContainer>
 
       <Formik
         validationSchema={validationSchema}
@@ -141,6 +141,6 @@ export const Register: FC = () => {
         )}
       </Formik>
 
-    </AuthWrapper>
+    </AuthContainer>
   );
 };

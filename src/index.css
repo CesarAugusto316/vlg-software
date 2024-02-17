@@ -5,13 +5,8 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    @apply font-sans text-gray-vlg-400 dark:text-white;
-  }
-
-  p,
-  div {
-    @apply text-sm;
+  body {
+    @apply text-sm font-sans text-gray-vlg-400 dark:text-white;
   }
 
   a {
@@ -53,7 +48,7 @@
   }
 
   .input-label {
-    @apply block mb-2 text-sm font-medium  dark:text-white;
+    @apply block mb-1 text-sm font-medium  dark:text-white;
   }
 
   .form-container {

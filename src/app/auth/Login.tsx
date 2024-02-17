@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons/faMicrosoft';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AuthWrapper } from './components/Section';
+import { AuthContainer } from './components/AuthContainer';
 import { LogoTitle } from './components/LogoTitle';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -31,7 +31,7 @@ export const Login: FC = () => {
   };
 
   return (
-    <AuthWrapper>
+    <AuthContainer>
       <Formik
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
@@ -91,7 +91,7 @@ export const Login: FC = () => {
                 <label htmlFor="remember" className="checkbox-label">Recordarme</label>
               </li>
 
-              <li className="mt-2">
+              <li className="mt-4">
                 <button
                   type="submit"
                   className="btn-primary"
@@ -104,6 +104,6 @@ export const Login: FC = () => {
           </Form>
         )}
       </Formik>
-    </AuthWrapper>
+    </AuthContainer>
   );
 };
