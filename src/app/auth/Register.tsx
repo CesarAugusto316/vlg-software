@@ -3,14 +3,14 @@ import { AuthWrapper } from './components/Section';
 import { LogoTitle } from './components/LogoTitle';
 import { Form, Link } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../components/FieldWithErrorMessage';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
 
 type FormValues = {
   name: string;
   lastName: string;
-  ruc: string;
+  rut: string;
   email: string;
   password: string;
   rePassword: string;
@@ -19,7 +19,7 @@ type FormValues = {
 const validationSchema = Yup.object<FormValues>({
   name: Yup.string().required('Ingresa tus nombres'),
   lastName: Yup.string().required('Ingresa tus apellidos'),
-  ruc: Yup.string().required('Ingresa tu RUT'),
+  rut: Yup.string().required('Ingresa tu RUT'),
   email: Yup.string().email('Ingresa un correo válido').required('Ingresa tu correo'),
   password: Yup.string().min(6).required('Ingresa tu contraseña'),
   rePassword: Yup.string().oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden').required('Repite tu contraseña'),
@@ -27,6 +27,13 @@ const validationSchema = Yup.object<FormValues>({
 
 
 export const Register: FC = () => {
+
+  const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
+    console.log(values);
+    actions.resetForm();
+    actions.setSubmitting(false);
+  };
+
   return (
     <AuthWrapper>
 
@@ -35,14 +42,12 @@ export const Register: FC = () => {
         initialValues={{
           name: '',
           lastName: '',
-          ruc: '',
+          rut: '',
           email: '',
           password: '',
           rePassword: ''
         }}
-        onSubmit={(values) => {
-          console.log(values);
-        }}>
+        onSubmit={handleSubmit}>
         {() => (
           <Form className=" form-container -mt-4 w-[680px] flex flex-col gap-4">
             <ul className="flex flex-col gap-4">
@@ -78,7 +83,7 @@ export const Register: FC = () => {
 
               <li>
                 <FieldWithErrorMessage
-                  name="ruc"
+                  name="rut"
                   type="text"
                   placeholder="Sin puntos ni guión"
                   label="RUT"
