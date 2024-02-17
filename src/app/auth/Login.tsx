@@ -7,38 +7,17 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import { FieldWithErrorMessage } from '../../components/FieldWithErrorMessage';
-
 // firebase
 import { auth } from '../../firebase/firebaseConfig';
-import { OAuthProvider, signInWithPopup } from 'firebase/auth';
+import { OAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 const authProvider = new OAuthProvider('microsoft.com');
+authProvider.addScope('mail.read');
 authProvider.setCustomParameters({
   prompt: 'consent',
   tenant: '69bcd3dc-7d85-417e-9152-1e1d402cbd8b',
 });
-
-authProvider.addScope('mail.read');
-
-
-const handleMicrosoftAuth = () => {
-  signInWithPopup(auth, authProvider)
-    .then((result) => {
-      // User is signed in.
-      // IdP data available in result.additionalUserInfo.profile.
-
-      // Get the OAuth access token and ID Token
-      const credential = OAuthProvider.credentialFromResult(result);
-      const accessToken = credential?.accessToken;
-      const idToken = credential?.idToken;
-      console.log(accessToken, idToken);
-    })
-    .catch((error) => {
-      // Handle error.
-      console.log(error);
-    });
-};
 
 
 type FormValues = {
@@ -56,16 +35,32 @@ const validationSchema = Yup.object<FormValues>({
 
 export const Login: FC = () => {
 
-  const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
-    console.log(values);
-    actions.resetForm();
-    actions.setSubmitting(false);
+  const handleEmailAndPassWordLogin = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
+    try {
+      signInWithEmailAndPassword(auth, values.email, values.password);
+      actions.resetForm();
+      actions.setSubmitting(false);
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
+
+  const handleMicrosoftLogin = async () => {
+    try {
+      const { user } = await signInWithPopup(auth, authProvider);
+      console.log(user);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
 
   return (
     <AuthContainer>
       <Formik
-        onSubmit={handleSubmit}
+        onSubmit={handleEmailAndPassWordLogin}
         validationSchema={validationSchema}
         initialValues={{ email: '', password: '', remember: false }}
       >
@@ -82,7 +77,7 @@ export const Login: FC = () => {
               </li>
 
               <li>
-                <button onClick={handleMicrosoftAuth} type="button" className="btn-light">
+                <button onClick={handleMicrosoftLogin} type="button" className="btn-light">
                   <FontAwesomeIcon size="lg" icon={faMicrosoft} />
                   <span>Ingresar con Microsoft</span>
                 </button>
