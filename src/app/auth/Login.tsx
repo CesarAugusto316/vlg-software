@@ -8,6 +8,32 @@ import * as Yup from 'yup';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import { FieldWithErrorMessage } from '../../components/FieldWithErrorMessage';
 
+// firebase
+import { auth } from '../../firebase/firebaseConfig';
+import { OAuthProvider, signInWithPopup } from 'firebase/auth';
+
+
+const authProvider = new OAuthProvider('microsoft.com');
+
+
+const handleMicrosoftAuth = () => {
+  signInWithPopup(auth, authProvider)
+    .then((result) => {
+      // User is signed in.
+      // IdP data available in result.additionalUserInfo.profile.
+
+      // Get the OAuth access token and ID Token
+      const credential = OAuthProvider.credentialFromResult(result);
+      const accessToken = credential?.accessToken;
+      const idToken = credential?.idToken;
+      console.log(accessToken, idToken);
+    })
+    .catch((error) => {
+      // Handle error.
+      console.log(error);
+    });
+};
+
 
 type FormValues = {
   email: string;
@@ -50,7 +76,7 @@ export const Login: FC = () => {
               </li>
 
               <li>
-                <button type="button" className="btn-light">
+                <button onClick={handleMicrosoftAuth} type="button" className="btn-light">
                   <FontAwesomeIcon size="lg" icon={faMicrosoft} />
                   <span>Ingresar con Microsoft</span>
                 </button>

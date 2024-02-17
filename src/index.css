@@ -44,7 +44,7 @@
   }
 
   .input-error {
-    @apply shadow-sm bg-white border text-sm  font-medium  rounded-lg border-red-vlg-500 focus:border-red-vlg-500/90 focus:ring-red-vlg-500/30 block w-full p-2.5 placeholder:italic placeholder-gray-vlg-400/80;
+    @apply bg-white border text-sm  font-medium  rounded-lg border-red-vlg-500 focus:border-red-vlg-500/90 focus:ring-red-vlg-500/30 block w-full p-2.5 placeholder:italic placeholder-gray-vlg-400/80;
   }
 
   .input-label {
