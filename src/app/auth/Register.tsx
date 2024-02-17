@@ -16,6 +16,15 @@ type FormValues = {
   rePassword: string;
 }
 
+const initialValues: FormValues = {
+  name: '',
+  lastName: '',
+  rut: '',
+  email: '',
+  password: '',
+  rePassword: ''
+};
+
 const validationSchema = Yup.object<FormValues>({
   name: Yup.string().required('Ingresa tus nombres'),
   lastName: Yup.string().required('Ingresa tus apellidos'),
@@ -42,30 +51,23 @@ export const Register: FC = () => {
 
       <Formik
         validationSchema={validationSchema}
-        initialValues={{
-          name: '',
-          lastName: '',
-          rut: '',
-          email: '',
-          password: '',
-          rePassword: ''
-        }}
-        onSubmit={handleSubmit}>
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+      >
         {() => (
           <Form className=" form-container -mt-4 w-[680px] flex flex-col gap-4">
-            <ul className="flex flex-col gap-4">
-              <li>
+            <div className="flex flex-col gap-4">
+              <div>
                 <LogoTitle />
-              </li>
+              </div>
 
-              <li>
+              <div>
                 <h2>Crea tu cuenta</h2>
                 <p>Ingresa tus datos para comenzar</p>
-              </li>
-            </ul>
+              </div>
+            </div>
 
             <ul className="grid grid-cols-2 gap-x-8 gap-y-4">
-
               <li>
                 <FieldWithErrorMessage
                   name="name"
@@ -121,23 +123,24 @@ export const Register: FC = () => {
               </li>
             </ul>
 
-            <ul className="flex flex-col gap-2 mt-5 w-2/3 mx-auto">
-              <li>
+            <div className="flex flex-col gap-2 mt-5 w-2/3 mx-auto">
+              <div>
                 <button
                   type="submit"
                   className="btn-primary"
                 >
                   Continuar
                 </button>
-              </li>
+              </div>
 
-              <li>
+              <div>
                 <Link className="btn-light-no-border" to="/login">Volver al Login</Link>
-              </li>
-            </ul>
+              </div>
+            </div>
           </Form>
         )}
       </Formik>
+
     </AuthWrapper>
   );
 };
