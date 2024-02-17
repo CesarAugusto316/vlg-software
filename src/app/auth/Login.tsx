@@ -14,6 +14,12 @@ import { OAuthProvider, signInWithPopup } from 'firebase/auth';
 
 
 const authProvider = new OAuthProvider('microsoft.com');
+authProvider.setCustomParameters({
+  prompt: 'consent',
+  tenant: '69bcd3dc-7d85-417e-9152-1e1d402cbd8b',
+});
+
+authProvider.addScope('mail.read');
 
 
 const handleMicrosoftAuth = () => {

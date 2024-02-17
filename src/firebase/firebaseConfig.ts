@@ -12,7 +12,7 @@ const firebaseConfig = {
   storageBucket: 'vlg-software.appspot.com',
   messagingSenderId: '345331279680',
   appId: '1:345331279680:web:f2fd49bbe2bcda38a53ca5',
-  measurementId: 'G-VTYG8N2HR5'
+  measurementId: 'G-VTYG8N2HR5',
 };
 
 // Initialize Firebase
