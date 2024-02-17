@@ -45,7 +45,11 @@
   }
 
   .input-primary {
-    @apply shadow-sm bg-white border text-sm  border-gray-vlg-300 font-medium  rounded-lg focus:ring-blue-vlg-900 focus:border-blue-vlg-900/90 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light placeholder:italic placeholder-gray-vlg-400/80;
+    @apply shadow-sm bg-white border text-sm  border-gray-vlg-300 font-medium  rounded-lg focus:ring-blue-vlg-900 focus:border-blue-vlg-900/90 block w-full p-2.5  placeholder:italic placeholder-gray-vlg-400/80;
+  }
+
+  .input-error {
+    @apply shadow-sm bg-white border text-sm  font-medium  rounded-lg border-red-vlg-500 focus:border-red-vlg-500/90 focus:ring-red-vlg-500/30 block w-full p-2.5 placeholder:italic placeholder-gray-vlg-400/80;
   }
 
   .input-label {
