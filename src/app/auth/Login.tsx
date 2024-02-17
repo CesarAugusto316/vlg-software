@@ -10,14 +10,12 @@ import { FieldWithErrorMessage } from '../../components/FieldWithErrorMessage';
 // firebase
 import { auth } from '../../firebase/firebaseConfig';
 import { OAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { tenant } from '../../constants';
 
 
 const authProvider = new OAuthProvider('microsoft.com');
 authProvider.addScope('mail.read');
-authProvider.setCustomParameters({
-  prompt: 'consent',
-  tenant: '69bcd3dc-7d85-417e-9152-1e1d402cbd8b',
-});
+authProvider.setCustomParameters({ prompt: 'consent', tenant });
 
 
 type FormValues = {
@@ -37,7 +35,8 @@ export const Login: FC = () => {
 
   const handleEmailAndPassWordLogin = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     try {
-      signInWithEmailAndPassword(auth, values.email, values.password);
+      const { user } = await signInWithEmailAndPassword(auth, values.email, values.password);
+      console.log(user);
       actions.resetForm();
       actions.setSubmitting(false);
     }
