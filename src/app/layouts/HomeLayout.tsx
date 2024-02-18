@@ -1,31 +1,8 @@
-import { onAuthStateChanged } from 'firebase/auth';
-import { FC, useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase/firebaseConfig';
+import { FC } from 'react';
+import { Outlet } from 'react-router-dom';
 
 
-export const RootLayout: FC = () => {
-  const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      if (user) {
-        console.log('user is logged in', user);
-        setIsAuthenticated(true);
-      }
-      else {
-        console.log('user is not logged in');
-        navigate('/login');
-      }
-    });
-
-    return () => unsubscribe();
-  }, [navigate]);
-
-
-  if (!isAuthenticated) return null;
-
+export const HomeLayout: FC = () => {
   return (
     <div className="h-screen w-screen overflow-hidden bg-white flex">
 
