@@ -5,5 +5,5 @@ export interface UserAccount {
   email: string;
   password: string;
   remember: boolean
-  orgnizationName: string;
+  organizationName: string;
 }

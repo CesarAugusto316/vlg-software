@@ -9,14 +9,14 @@ import { UserAccount } from '../../../models/UserAccount';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
 
 
-type FormValues = Pick<UserAccount, 'orgnizationName'>
+type FormValues = Pick<UserAccount, 'organizationName'>
 
 const initialValues: FormValues = {
-  orgnizationName: '',
+  organizationName: '',
 };
 
 const validationSchema = Yup.object<FormValues>({
-  organizationName: Yup.string().required('Ingresa tus nombres'),
+  organizationName: Yup.string().required('Ingresa un nombre'),
 });
 
 
@@ -51,80 +51,37 @@ export const Step2: FC = () => {
 
               <div>
                 <h2>Crea tu cuenta</h2>
-                <p>Ingresa tus datos para comenzar</p>
+                <p>Ahora los datos de tu organización</p>
               </div>
             </div>
 
-            <ul className="grid grid-cols-2 gap-x-8 gap-y-4">
-              <li>
-                <FieldWithErrorMessage
-                  name="name"
-                  type="text"
-                  placeholder="Ingresa tus nombres"
-                  label="Nombres"
-                />
-              </li>
+            <div className="mb-14">
+              <FieldWithErrorMessage
+                name="organizationName"
+                type="text"
+                placeholder="Ingresa un nombre"
+                label="¿Cuál es el nombre de tu organización?"
+              />
+            </div>
 
+            <ul className="flex flex-col gap-2 mt-5 w-2/3 mx-auto">
               <li>
-                <FieldWithErrorMessage
-                  name="lastName"
-                  type="text"
-                  placeholder="Ingresa tus apellidos"
-                  label="Apellidos"
-                />
-              </li>
-
-              <li>
-                <FieldWithErrorMessage
-                  name="rut"
-                  type="text"
-                  placeholder="Sin puntos ni guión"
-                  label="RUT"
-                />
-              </li>
-
-              <li>
-                <FieldWithErrorMessage
-                  name="email"
-                  type="email"
-                  placeholder="Ingresa tu correo"
-                  label="Correo"
-                />
-              </li>
-
-              <li>
-                <FieldWithErrorMessage
-                  name="password"
-                  type="password"
-                  placeholder="Ingresa tu contraseña"
-                  label="Contraseña"
-                />
-              </li>
-
-              <li>
-                <FieldWithErrorMessage
-                  name="rePassword"
-                  type="password"
-                  placeholder="Repite tu contraseña"
-                  label="Confirmar contraseña"
-                />
-              </li>
-            </ul>
-
-            <div className="flex flex-col gap-2 mt-5 w-2/3 mx-auto">
-              <div>
                 <button
                   type="submit"
                   className="btn-primary"
                 >
-                  Continuar
+                  Crear cuenta
                 </button>
-              </div>
+              </li>
 
-              <div>
+              <li>
+                <Link className="btn-light-no-border" to="/login">Volver a Mis Datos</Link>
+              </li>
+
+              <li>
                 <Link className="btn-light-no-border" to="/login">Volver al Login</Link>
-              </div>
-            </div>
+              </li>
+            </ul>
           </Form>
         )}
       </Formik>

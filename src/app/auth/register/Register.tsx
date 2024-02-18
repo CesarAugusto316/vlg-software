@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { Step2 } from './Step2';
+import { Step3 } from './Step3';
 
 
 export const Register: FC = () => {
   return (
-    <Step2 />
+    <Step3 />
   );
 };
