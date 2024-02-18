@@ -3,7 +3,7 @@ import { faMicrosoft } from '@fortawesome/free-brands-svg-icons/faMicrosoft';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContainer } from '../components/AuthContainer';
 import { LogoTitle } from '../components/LogoTitle';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
@@ -36,7 +36,6 @@ const validationSchema = Yup.object<FormValues>({
 
 export const Login: FC = () => {
   const setAccountProfile = useVlgStore(state => state.setAccountProfile);
-  const navigate = useNavigate();
 
   const handleEmailAndPassWordLogin = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     try {
@@ -45,7 +44,6 @@ export const Login: FC = () => {
       setAccountProfile({ ...values, uuid: userCredentials.uid, accessToken: idToken });
       actions.resetForm();
       actions.setSubmitting(false);
-      navigate('/');
     }
     catch (error) {
       console.log(error);
@@ -57,7 +55,6 @@ export const Login: FC = () => {
       const { user: userCredentials } = await signInWithPopup(auth, authProvider);
       const idToken = await userCredentials.getIdToken();
       setAccountProfile({ uuid: userCredentials.uid, accessToken: idToken });
-      navigate('/');
     }
     catch (error) {
       console.log(error);
