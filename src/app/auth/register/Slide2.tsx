@@ -20,7 +20,7 @@ const validationSchema = Yup.object<FormValues>({
 });
 
 
-export const Step2: FC = () => {
+export const Slide2: FC = () => {
   const accountRegistration = useVlgStore(state => state.accountRegistration);
   const setAccountRegistration = useVlgStore(state => state.setAccountRegistration);
   const onPrevSlide = useSlides(state => state.onPrevSlide);

@@ -3,7 +3,7 @@ import { LogoTitle } from '../components/LogoTitle';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
 
 
-export const Step3: FC = () => {
+export const Slide3: FC = () => {
   const { name } = useVlgStore(state => state.accountRegistration);
 
   return (

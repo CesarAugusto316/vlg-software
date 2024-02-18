@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { numberOfSlides } from './Slides';
+import { numberOfSlides } from './SlidesList';
 
 
 type SlidesStore = {

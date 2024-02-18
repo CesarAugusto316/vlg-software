@@ -2,9 +2,7 @@ import { FC, useEffect } from 'react';
 import { useSpringRef, useTransition } from '@react-spring/web';
 import { AuthContainer } from '../components/AuthContainer';
 import { useSlides } from './useSlidesHook';
-import { slides } from './Slides';
-
-
+import { slidesList } from './SlidesList';
 
 
 export const Register: FC = () => {
@@ -30,7 +28,7 @@ export const Register: FC = () => {
   return (
     <AuthContainer>
       {transitions((style, i) => {
-        const Page = slides[i];
+        const Page = slidesList[i];
         return <Page style={style} />;
       })}
     </AuthContainer>
