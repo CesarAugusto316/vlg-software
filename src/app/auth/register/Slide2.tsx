@@ -35,6 +35,10 @@ export const Slide2: FC = () => {
       const idToken = await userCredentials.getIdToken();
       actions.setSubmitting(false);
       actions.resetForm();
+
+      // When the use is created the onAuthStateChanged will set the isAutenticated to true inevitably
+      // so we don't need to set it there, maybe create a different onAuthStateChanged for the register
+      // and login pages.
       setAccountProfile({ ...values, uuid: userCredentials.uid, accessToken: idToken });
       onNextSlide();
     }
