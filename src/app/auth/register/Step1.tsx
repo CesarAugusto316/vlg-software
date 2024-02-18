@@ -5,43 +5,47 @@ import { Link } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 import { Formik, FormikHelpers, Form } from 'formik';
 import * as Yup from 'yup';
+import { UserAccount } from '../../../models/UserAccount';
+import { useVlgStore } from '../../../store/vlgStore';
 
 
-type FormValues = {
-  name: string;
-  // lastName: string;
-  // rut: string;
-  // email: string;
-  // password: string;
-  // rePassword: string;
+interface FormValues extends Pick<UserAccount, (
+  'name' |
+  'lastName' |
+  'rut' |
+  'email' |
+  'password'
+)> {
+  rePassword: string;
 }
 
 const initialValues: FormValues = {
   name: '',
-  // lastName: '',
-  // rut: '',
-  // email: '',
-  // password: '',
-  // rePassword: ''
+  lastName: '',
+  rut: '',
+  email: '',
+  password: '',
+  rePassword: ''
 };
 
 const validationSchema = Yup.object<FormValues>({
   name: Yup.string().required('Ingresa tus nombres'),
-  // lastName: Yup.string().required('Ingresa tus apellidos'),
-  // rut: Yup.string().required('Ingresa tu RUT'),
-  // email: Yup.string().email('Ingresa un correo válido').required('Ingresa tu correo'),
-  // password: Yup.string().min(6).required('Ingresa tu contraseña'),
-  // rePassword:
-  //   Yup.string()
-  //     .oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden')
-  //     .required('Repite tu contraseña'),
+  lastName: Yup.string().required('Ingresa tus apellidos'),
+  rut: Yup.string().required('Ingresa tu RUT'),
+  email: Yup.string().email('Ingresa un correo válido').required('Ingresa tu correo'),
+  password: Yup.string().min(6).required('Ingresa tu contraseña'),
+  rePassword:
+    Yup.string()
+      .oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden')
+      .required('Repite tu contraseña'),
 });
 
 
-export const Register: FC = () => {
+export const Step1: FC = () => {
+  const setAccountRegistration = useVlgStore(state => state.setAccountRegistration);
 
-  const handleSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
-    console.log(values);
+  const handleNextStep = (values: FormValues, actions: FormikHelpers<FormValues>) => {
+    setAccountRegistration(values);
     actions.resetForm();
     actions.setSubmitting(false);
   };
@@ -52,7 +56,7 @@ export const Register: FC = () => {
       <Formik
         validationSchema={validationSchema}
         initialValues={initialValues}
-        onSubmit={handleSubmit}
+        onSubmit={handleNextStep}
       >
         {() => (
           <Form className=" form-container -mt-4 w-[680px] flex flex-col gap-4">
