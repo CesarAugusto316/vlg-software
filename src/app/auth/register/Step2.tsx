@@ -6,6 +6,7 @@ import { Formik, FormikHelpers, Form } from 'formik';
 import * as Yup from 'yup';
 import { UserAccount } from '../../../models/UserAccount';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
+import { useSlides } from './useSlidesHook';
 
 
 type FormValues = Pick<UserAccount, 'organizationName'>
@@ -22,6 +23,7 @@ const validationSchema = Yup.object<FormValues>({
 export const Step2: FC = () => {
   const accountRegistration = useVlgStore(state => state.accountRegistration);
   const setAccountRegistration = useVlgStore(state => state.setAccountRegistration);
+  const onPrevSlide = useSlides(state => state.onPrevSlide);
 
 
   const handleCreateAccount = (values: FormValues, actions: FormikHelpers<FormValues>) => {
@@ -72,7 +74,7 @@ export const Step2: FC = () => {
             </li>
 
             <li>
-              <Link className="btn-light-no-border" to="/login">Volver a Mis Datos</Link>
+              <button onClick={onPrevSlide} className="btn-light-no-border">Volver a Mis Datos</button>
             </li>
 
             <li>

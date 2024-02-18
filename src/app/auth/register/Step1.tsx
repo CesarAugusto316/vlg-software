@@ -6,6 +6,7 @@ import { Formik, FormikHelpers, Form } from 'formik';
 import * as Yup from 'yup';
 import { UserAccount } from '../../../models/UserAccount';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
+import { useSlides } from './useSlidesHook';
 
 
 interface FormValues extends Pick<UserAccount, (
@@ -42,11 +43,13 @@ const validationSchema = Yup.object<FormValues>({
 
 export const Step1: FC = () => {
   const setAccountRegistration = useVlgStore(state => state.setAccountRegistration);
+  const onNextSlide = useSlides(state => state.onNextSlide);
 
   const handleNextStep = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     setAccountRegistration(values);
     actions.resetForm();
     actions.setSubmitting(false);
+    onNextSlide();
   };
 
   return (
@@ -127,7 +130,8 @@ export const Step1: FC = () => {
           <div className="flex flex-col gap-2 mt-5 w-2/3 mx-auto">
             <div>
               <button
-                type="submit"
+                // type="submit"
+                onClick={onNextSlide}
                 className="btn-primary"
               >
                 Continuar
