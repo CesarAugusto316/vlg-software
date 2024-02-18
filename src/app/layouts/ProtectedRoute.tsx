@@ -10,7 +10,7 @@ interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
-// TODO store accessToken in localStorage
+// TODO remember field sloud be stored in localStorage
 export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const accessToken = useVlgStore(state => state.accountProfile?.accessToken);
   const setAccessToken = useVlgStore(state => state.setAccountProfile);
@@ -23,7 +23,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       if (user) {
         console.log('user is logged in', user);
         const accessToken = await user.getIdToken();
-        setAccessToken({ accessToken });
+        setAccessToken({ accessToken, uuid: user.uid, isAutenticated: true });
       }
       else {
         console.log('user is not logged in');
