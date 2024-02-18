@@ -22,6 +22,9 @@ export const Register: FC = () => {
 
   useEffect(() => {
     transRef.start();
+    // In order for this to work properly, we need to set firstRender to false after the first render
+    // but in a parent component
+
     // setFirstRender(); // Set firstRender to false after first render
   }, [index, transRef]);
 
