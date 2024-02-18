@@ -23,7 +23,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       if (user) {
         console.log('user is logged in', user);
         const accessToken = await user.getIdToken();
-        setAccessToken({ accessToken, uuid: user.uid, isAutenticated: true });
+        setAccessToken({ ...accountProfile, accessToken, uuid: user.uid, isAutenticated: true });
       }
       else {
         console.log('user is not logged in');
@@ -39,7 +39,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     };
     return cleanUp;
 
-  }, [accountProfile?.accessToken]);
+  }, [accountProfile]);
 
 
   if (!accountProfile.accessToken) return null;
