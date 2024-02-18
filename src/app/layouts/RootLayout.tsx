@@ -12,7 +12,7 @@ export const RootLayout: FC = () => {
             <img src="" alt="" />
             <h2>Logo</h2>
           </div>
-          <ul className="flex flex-col gap-6 p-6">
+          <ul className="flex flex-col gap-6 p-6 min-w-44">
             <li>Empresas</li>
             <li>Operaciones</li>
             <li>Contabilidad</li>
