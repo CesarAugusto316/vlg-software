@@ -32,7 +32,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     });
 
     return () => unsubscribe && unsubscribe();
-  }, []);
+  }, [accessToken]);
 
 
   if (!accessToken) return null;
