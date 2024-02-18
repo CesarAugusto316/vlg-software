@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase/firebaseConfig';
@@ -12,13 +12,13 @@ interface ProtectedRouteProps {
 
 // TODO remember field sloud be stored in localStorage
 export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
-  const accessToken = useVlgStore(state => state.accountProfile?.accessToken);
+  const accountProfile = useVlgStore(state => state.accountProfile);
   const setAccessToken = useVlgStore(state => state.setAccountProfile);
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    if (accessToken) return;
+    if (accountProfile?.accessToken) return;
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log('user is logged in', user);
@@ -31,11 +31,19 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       }
     });
 
-    return () => unsubscribe && unsubscribe();
-  }, [accessToken]);
+    const cleanUp = () => {
+      unsubscribe && unsubscribe();
+      if (!accountProfile?.remember) {
+        signOut(auth);
+      }
+    };
+    return cleanUp;
+
+  }, [accountProfile?.accessToken]);
 
 
-  if (!accessToken) return null;
+  if (!accountProfile.accessToken) return null;
+
 
   return children;
 };
