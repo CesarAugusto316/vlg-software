@@ -5,8 +5,7 @@ import { useVlgStore } from '../../../vlgStore/vlgStore';
 
 
 export const Step3: FC = () => {
-  const accountRegistration = useVlgStore(state => state.accountRegistration);
-
+  const { name } = useVlgStore(state => state.accountRegistration);
 
   return (
     <AuthContainer>
@@ -17,12 +16,13 @@ export const Step3: FC = () => {
           </div>
 
           <div>
-            <h2>Crea tu cuenta</h2>
-            <p>Ahora los datos de tu organización</p>
+            <h2>Bienvenido {name} </h2>
+            <h3>tu cuenta ha sido creada</h3>
+            <p>Tu cuenta está lista, ya puedes ingresar!</p>
           </div>
         </div>
 
-        <div className="mb-14 bg-gray-vlg-200 h-36">
+        <div className="mb-6 bg-gray-vlg-200 h-44">
 
         </div>
 
