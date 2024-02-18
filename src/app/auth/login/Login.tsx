@@ -41,7 +41,7 @@ export const Login: FC = () => {
     try {
       const { user: userCredentials } = await signInWithEmailAndPassword(auth, values.email, values.password);
       const idToken = await userCredentials.getIdToken();
-      setAccountProfile({ ...values, uuid: userCredentials.uid, accessToken: idToken });
+      setAccountProfile({ uuid: userCredentials.uid, accessToken: idToken, isAutenticated: true });
       actions.resetForm();
       actions.setSubmitting(false);
     }
@@ -54,7 +54,7 @@ export const Login: FC = () => {
     try {
       const { user: userCredentials } = await signInWithPopup(auth, authProvider);
       const idToken = await userCredentials.getIdToken();
-      setAccountProfile({ uuid: userCredentials.uid, accessToken: idToken });
+      setAccountProfile({ uuid: userCredentials.uid, accessToken: idToken, isAutenticated: true });
     }
     catch (error) {
       console.log(error);

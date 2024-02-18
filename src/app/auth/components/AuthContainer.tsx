@@ -10,26 +10,26 @@ interface AuthWrapperProps {
 }
 
 export const AuthContainer: FC<AuthWrapperProps> = ({ children }) => {
-  const accessToken = useVlgStore(state => state.accountProfile?.accessToken);
-  const setAccessToken = useVlgStore(state => state.setAccountProfile);
+  const isAutenticated = useVlgStore(state => state.accountProfile?.isAutenticated);
+  const setIsAutenticated = useVlgStore(state => state.setAccountProfile);
+
 
   useEffect(() => {
-    if (accessToken) return;
+    if (isAutenticated) return;
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const accessToken = await user.getIdToken();
-        setAccessToken({ accessToken });
+        setIsAutenticated({ isAutenticated: true, accessToken });
       }
     });
 
     return () => unsubscribe && unsubscribe();
-  }, [accessToken]);
+  }, [isAutenticated]);
 
 
-  if (accessToken) {
+  if (isAutenticated) {
     return <Navigate to="/" />;
   }
-
   return (
     <section className="bg-gradient-to-b from-gray-vlg-200 to-white w-screen h-screen overflow-hidden to-90% flex items-center justify-center">
       {children}

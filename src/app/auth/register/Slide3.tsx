@@ -5,6 +5,11 @@ import { useVlgStore } from '../../../vlgStore/vlgStore';
 
 export const Slide3: FC = () => {
   const { name } = useVlgStore(state => state.accountProfile);
+  const setIsAuthenticated = useVlgStore(state => state.setAccountProfile);
+
+  const handleNavigation = () => {
+    setIsAuthenticated({ isAutenticated: true });
+  };
 
   return (
     <div className=" form-container -mt-4 w-[680px] flex flex-col gap-4">
@@ -25,7 +30,8 @@ export const Slide3: FC = () => {
       </div>
 
       <button
-        type="submit"
+        onClick={handleNavigation}
+        type="button"
         className="btn-primary"
       >
         Ingresar ahora

@@ -9,4 +9,5 @@ export interface AccountProfile {
   password: string;
   remember: boolean
   organizationName: string;
+  isAutenticated: boolean;
 }
