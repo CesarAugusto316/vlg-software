@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { AuthContainer } from '../components/AuthContainer';
 import { LogoTitle } from '../components/LogoTitle';
 import { Link } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
@@ -35,57 +34,53 @@ export const Step2: FC = () => {
 
 
   return (
-    <AuthContainer>
-
-      <Formik
-        validationSchema={validationSchema}
-        initialValues={initialValues}
-        onSubmit={handleCreateAccount}
-      >
-        {() => (
-          <Form className=" form-container -mt-4 w-[680px] flex flex-col gap-4">
-            <div className="flex flex-col gap-4">
-              <div>
-                <LogoTitle />
-              </div>
-
-              <div>
-                <h2>Crea tu cuenta</h2>
-                <p>Ahora los datos de tu organización</p>
-              </div>
+    <Formik
+      validationSchema={validationSchema}
+      initialValues={initialValues}
+      onSubmit={handleCreateAccount}
+    >
+      {() => (
+        <Form className=" form-container -mt-4 w-[680px] flex flex-col gap-4">
+          <div className="flex flex-col gap-4">
+            <div>
+              <LogoTitle />
             </div>
 
-            <div className="mb-14">
-              <FieldWithErrorMessage
-                name="organizationName"
-                type="text"
-                placeholder="Ingresa un nombre"
-                label="¿Cuál es el nombre de tu organización?"
-              />
+            <div>
+              <h2>Crea tu cuenta</h2>
+              <p>Ahora los datos de tu organización</p>
             </div>
+          </div>
 
-            <ul className="flex flex-col gap-2 mt-5 w-2/3 mx-auto">
-              <li>
-                <button
-                  type="submit"
-                  className="btn-primary"
-                >
-                  Crear cuenta
-                </button>
-              </li>
+          <div className="mb-14">
+            <FieldWithErrorMessage
+              name="organizationName"
+              type="text"
+              placeholder="Ingresa un nombre"
+              label="¿Cuál es el nombre de tu organización?"
+            />
+          </div>
 
-              <li>
-                <Link className="btn-light-no-border" to="/login">Volver a Mis Datos</Link>
-              </li>
+          <ul className="flex flex-col gap-2 mt-5 w-2/3 mx-auto">
+            <li>
+              <button
+                type="submit"
+                className="btn-primary"
+              >
+                Crear cuenta
+              </button>
+            </li>
 
-              <li>
-                <Link className="btn-light-no-border" to="/login">Volver al Login</Link>
-              </li>
-            </ul>
-          </Form>
-        )}
-      </Formik>
+            <li>
+              <Link className="btn-light-no-border" to="/login">Volver a Mis Datos</Link>
+            </li>
 
-    </AuthContainer>
+            <li>
+              <Link className="btn-light-no-border" to="/login">Volver al Login</Link>
+            </li>
+          </ul>
+        </Form>
+      )}
+    </Formik>
   );
 };
