@@ -6,7 +6,7 @@ import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage
 import { Formik, FormikHelpers, Form } from 'formik';
 import * as Yup from 'yup';
 import { UserAccount } from '../../../models/UserAccount';
-import { useVlgStore } from '../../../store/vlgStore';
+import { useVlgStore } from '../../../vlgStore/vlgStore';
 
 
 interface FormValues extends Pick<UserAccount, (
