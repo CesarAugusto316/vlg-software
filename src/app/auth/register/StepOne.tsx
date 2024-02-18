@@ -1,40 +1,40 @@
 import { FC } from 'react';
-import { AuthContainer } from './components/AuthContainer';
-import { LogoTitle } from './components/LogoTitle';
+import { AuthContainer } from '../components/AuthContainer';
+import { LogoTitle } from '../components/LogoTitle';
 import { Link } from 'react-router-dom';
-import { FieldWithErrorMessage } from '../../components/FieldWithErrorMessage';
+import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 import { Formik, FormikHelpers, Form } from 'formik';
 import * as Yup from 'yup';
 
 
 type FormValues = {
   name: string;
-  lastName: string;
-  rut: string;
-  email: string;
-  password: string;
-  rePassword: string;
+  // lastName: string;
+  // rut: string;
+  // email: string;
+  // password: string;
+  // rePassword: string;
 }
 
 const initialValues: FormValues = {
   name: '',
-  lastName: '',
-  rut: '',
-  email: '',
-  password: '',
-  rePassword: ''
+  // lastName: '',
+  // rut: '',
+  // email: '',
+  // password: '',
+  // rePassword: ''
 };
 
 const validationSchema = Yup.object<FormValues>({
   name: Yup.string().required('Ingresa tus nombres'),
-  lastName: Yup.string().required('Ingresa tus apellidos'),
-  rut: Yup.string().required('Ingresa tu RUT'),
-  email: Yup.string().email('Ingresa un correo válido').required('Ingresa tu correo'),
-  password: Yup.string().min(6).required('Ingresa tu contraseña'),
-  rePassword:
-    Yup.string()
-      .oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden')
-      .required('Repite tu contraseña'),
+  // lastName: Yup.string().required('Ingresa tus apellidos'),
+  // rut: Yup.string().required('Ingresa tu RUT'),
+  // email: Yup.string().email('Ingresa un correo válido').required('Ingresa tu correo'),
+  // password: Yup.string().min(6).required('Ingresa tu contraseña'),
+  // rePassword:
+  //   Yup.string()
+  //     .oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden')
+  //     .required('Repite tu contraseña'),
 });
 
 

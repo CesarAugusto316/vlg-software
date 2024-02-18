@@ -1,16 +1,17 @@
 import { FC } from 'react';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons/faMicrosoft';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AuthContainer } from './components/AuthContainer';
-import { LogoTitle } from './components/LogoTitle';
+import { AuthContainer } from '../components/AuthContainer';
+import { LogoTitle } from '../components/LogoTitle';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { FieldWithErrorMessage } from '../../components/FieldWithErrorMessage';
+import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 // firebase
-import { auth } from '../../firebase/firebaseConfig';
+import { auth } from '../../../firebase/firebaseConfig';
 import { OAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
-import { tenant } from '../../constants';
+import { tenant } from '../../../constants';
+import { UserAccount } from '../../../models/UserAccount';
 
 
 const authProvider = new OAuthProvider('microsoft.com');
@@ -18,11 +19,12 @@ authProvider.addScope('mail.read');
 authProvider.setCustomParameters({ prompt: 'consent', tenant });
 
 
-type FormValues = {
-  email: string;
-  password: string;
-  remember: boolean;
-}
+type FormValues =
+  Pick<UserAccount, (
+    'email' |
+    'password' |
+    'remember'
+  )>
 
 const validationSchema = Yup.object<FormValues>({
   email: Yup.string().email('Ingresa un correo válido').required('Ingresa tu correo'),
