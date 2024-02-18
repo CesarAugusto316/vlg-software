@@ -16,17 +16,24 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const setAccessToken = useVlgStore(state => state.setAccountProfile);
   const navigate = useNavigate();
 
+  const handleRedirectToHomeRoute = async () => {
+    if (['/login', '/register'].includes(window.location.pathname)) {
+      navigate('/');
+    }
+  };
+
   useEffect(() => {
-    if (accessToken) return;
+    if (accessToken) {
+      handleRedirectToHomeRoute();
+      return;
+    }
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log('user is logged in', user);
         const accessToken = await user.getIdToken();
         setAccessToken({ accessToken });
 
-        if (['/login', '/register'].includes(window.location.pathname)) {
-          navigate('/');
-        }
+        handleRedirectToHomeRoute();
       }
       else {
         console.log('user is not logged in');
