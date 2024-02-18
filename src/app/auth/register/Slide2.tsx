@@ -31,15 +31,10 @@ export const Slide2: FC = () => {
 
   const handleCreateAccount = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     try {
-      const { user: userCredentials } = await createUserWithEmailAndPassword(auth, accountProfile.email, accountProfile.password);
-      const idToken = await userCredentials.getIdToken();
+      await createUserWithEmailAndPassword(auth, accountProfile.email, accountProfile.password);
+      setAccountProfile({ ...values });
       actions.setSubmitting(false);
       actions.resetForm();
-
-      // When the use is created the onAuthStateChanged will set the isAutenticated to true inevitably
-      // so we don't need to set it there, maybe create a different onAuthStateChanged for the register
-      // and login pages.
-      setAccountProfile({ ...values, uuid: userCredentials.uid, accessToken: idToken });
       onNextSlide();
     }
     catch (error) {
@@ -82,6 +77,7 @@ export const Slide2: FC = () => {
                 type="submit"
                 className="btn-primary"
               >
+                {/* SHOW LOADING MESSAGE */}
                 Crear cuenta
               </button>
             </li>
