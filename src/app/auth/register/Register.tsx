@@ -28,8 +28,8 @@ export const Register: FC = () => {
   return (
     <AuthContainer>
       {transitions((style, i) => {
-        const Page = slidesList[i];
-        return <Page style={style} />;
+        const Slide = slidesList[i];
+        return <Slide style={style} />;
       })}
     </AuthContainer>
   );

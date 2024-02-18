@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 import { Formik, FormikHelpers, Form } from 'formik';
 import * as Yup from 'yup';
-import { UserAccount } from '../../../models/UserAccount';
+import { AccountProfile } from '../../../models/AccountProfile';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
 import { useSlides } from './useSlidesHook';
 
 
-interface FormValues extends Pick<UserAccount, (
+interface FormValues extends Pick<AccountProfile, (
   'name' |
   'lastName' |
   'rut' |
@@ -19,14 +19,6 @@ interface FormValues extends Pick<UserAccount, (
   rePassword: string;
 }
 
-const initialValues: FormValues = {
-  name: '',
-  lastName: '',
-  rut: '',
-  email: '',
-  password: '',
-  rePassword: ''
-};
 
 const validationSchema = Yup.object<FormValues>({
   name: Yup.string().required('Ingresa tus nombres'),
@@ -42,13 +34,22 @@ const validationSchema = Yup.object<FormValues>({
 
 
 export const Slide1: FC = () => {
-  const setAccountRegistration = useVlgStore(state => state.setAccountRegistration);
+  const accountProfile = useVlgStore(state => state.accountProfile);
+  const setAccountProfile = useVlgStore(state => state.setAccountProfile);
   const onNextSlide = useSlides(state => state.onNextSlide);
 
+  const initialValues: FormValues = {
+    name: accountProfile.name ?? '',
+    lastName: accountProfile.lastName ?? '',
+    rut: accountProfile.rut ?? '',
+    email: accountProfile.email ?? '',
+    password: accountProfile.password ?? '',
+    rePassword: accountProfile.password ?? '',
+  };
+
   const handleNextStep = (values: FormValues, actions: FormikHelpers<FormValues>) => {
-    setAccountRegistration(values);
-    actions.resetForm();
-    actions.setSubmitting(false);
+    setAccountProfile(values);
+    actions.setSubmitting(true);
     onNextSlide();
   };
 
@@ -130,8 +131,8 @@ export const Slide1: FC = () => {
           <div className="flex flex-col gap-2 mt-5 w-2/3 mx-auto">
             <div>
               <button
-                // type="submit"
-                onClick={onNextSlide}
+                type="submit"
+                // onClick={onNextSlide}
                 className="btn-primary"
               >
                 Continuar

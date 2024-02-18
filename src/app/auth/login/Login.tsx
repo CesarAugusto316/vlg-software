@@ -11,7 +11,7 @@ import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage
 import { auth } from '../../../firebase/firebaseConfig';
 import { OAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { tenant } from '../../../constants';
-import { UserAccount } from '../../../models/UserAccount';
+import { AccountProfile } from '../../../models/AccountProfile';
 
 
 const authProvider = new OAuthProvider('microsoft.com');
@@ -20,7 +20,7 @@ authProvider.setCustomParameters({ prompt: 'consent', tenant });
 
 
 type FormValues =
-  Pick<UserAccount, (
+  Pick<AccountProfile, (
     'email' |
     'password' |
     'remember'

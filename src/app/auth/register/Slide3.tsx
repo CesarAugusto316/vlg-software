@@ -4,7 +4,7 @@ import { useVlgStore } from '../../../vlgStore/vlgStore';
 
 
 export const Slide3: FC = () => {
-  const { name } = useVlgStore(state => state.accountRegistration);
+  const { name } = useVlgStore(state => state.accountProfile);
 
   return (
     <div className=" form-container -mt-4 w-[680px] flex flex-col gap-4">

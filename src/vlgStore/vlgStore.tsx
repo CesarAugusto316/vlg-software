@@ -1,13 +1,11 @@
 import { create } from 'zustand';
-import { AccountRegistrationSlice, createAccountRegistrationSlice } from './slices/accountRegistration';
+import { AccountProfileSlice, createAccountProfileSlice } from './slices/AccountProfileSlice';
 
 
-type StoreSlices = AccountRegistrationSlice  // & UserSlice
+type StoreSlices = AccountProfileSlice  // & UserSlice
 
 export const useVlgStore = create<StoreSlices>(
   (...args) => ({
-    ...createAccountRegistrationSlice(...args)
-    // ...createOnboardingSlice(...args),
-    // ...createUserSlice(...args),
+    ...createAccountProfileSlice(...args)
   })
 );

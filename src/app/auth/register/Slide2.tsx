@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 import { Formik, FormikHelpers, Form } from 'formik';
 import * as Yup from 'yup';
-import { UserAccount } from '../../../models/UserAccount';
+import { AccountProfile } from '../../../models/AccountProfile';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
 import { useSlides } from './useSlidesHook';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebase/firebaseConfig';
 
 
-type FormValues = Pick<UserAccount, 'organizationName'>
+type FormValues = Pick<AccountProfile, 'organizationName'>
 
 const initialValues: FormValues = {
   organizationName: '',
@@ -21,17 +23,27 @@ const validationSchema = Yup.object<FormValues>({
 
 
 export const Slide2: FC = () => {
-  const accountRegistration = useVlgStore(state => state.accountRegistration);
-  const setAccountRegistration = useVlgStore(state => state.setAccountRegistration);
+  const accountProfile = useVlgStore(state => state.accountProfile);
+  const setAccountProfile = useVlgStore(state => state.setAccountProfile);
   const onPrevSlide = useSlides(state => state.onPrevSlide);
+  const onNextSlide = useSlides(state => state.onNextSlide);
 
 
-  const handleCreateAccount = (values: FormValues, actions: FormikHelpers<FormValues>) => {
-    setAccountRegistration(values);
-    console.log(values, accountRegistration);
+  const handleCreateAccount = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
+    try {
+      setAccountProfile(values);
 
-    actions.resetForm();
-    actions.setSubmitting(false);
+      const { user: userCredentials } = await createUserWithEmailAndPassword(auth, accountProfile.email, accountProfile.password);
+      const idToken = await userCredentials.getIdToken();
+      console.log(idToken, userCredentials);
+
+      actions.setSubmitting(false);
+      actions.resetForm();
+      onNextSlide();
+    }
+    catch (error) {
+      console.error(error);
+    }
   };
 
 
@@ -74,7 +86,12 @@ export const Slide2: FC = () => {
             </li>
 
             <li>
-              <button onClick={onPrevSlide} className="btn-light-no-border">Volver a Mis Datos</button>
+              <button
+                type="button"
+                onClick={onPrevSlide}
+                className="btn-light-no-border">
+                Volver a Mis Datos
+              </button>
             </li>
 
             <li>
