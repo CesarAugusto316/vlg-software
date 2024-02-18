@@ -4,7 +4,8 @@ import { AccountProfile } from '../../models/AccountProfile';
 
 export type AccountProfileSlice = {
   accountProfile: AccountProfile
-  setAccountProfile: (user: Partial<AccountProfile>) => void
+  setAccountProfile: (user: Partial<AccountProfile>) => void,
+  resetAccountProfile: () => void
 }
 
 export const createAccountProfileSlice: StateCreator<AccountProfileSlice> = (set) => ({
@@ -17,5 +18,9 @@ export const createAccountProfileSlice: StateCreator<AccountProfileSlice> = (set
         ...user
       }
     }));
+  },
+
+  resetAccountProfile: () => {
+    set({ accountProfile: {} as AccountProfile });
   }
 });
