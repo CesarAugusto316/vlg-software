@@ -31,12 +31,12 @@ export const Slide2: FC = () => {
 
   const handleCreateAccount = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     try {
-      setAccountProfile(values);
 
       const { user: userCredentials } = await createUserWithEmailAndPassword(auth, accountProfile.email, accountProfile.password);
       const idToken = await userCredentials.getIdToken();
       console.log(idToken, userCredentials);
 
+      setAccountProfile({ ...values, uuid: userCredentials.uid, accessToken: idToken });
       actions.setSubmitting(false);
       actions.resetForm();
       onNextSlide();

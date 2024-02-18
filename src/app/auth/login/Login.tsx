@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
+import { useVlgStore } from '../../../vlgStore/vlgStore';
+import { AccountProfile } from '../../../models/AccountProfile';
 // firebase
 import { auth } from '../../../firebase/firebaseConfig';
 import { OAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { tenant } from '../../../constants';
-import { AccountProfile } from '../../../models/AccountProfile';
 
 
 const authProvider = new OAuthProvider('microsoft.com');
@@ -34,11 +35,13 @@ const validationSchema = Yup.object<FormValues>({
 
 
 export const Login: FC = () => {
+  const setAccountProfile = useVlgStore(state => state.setAccountProfile);
 
   const handleEmailAndPassWordLogin = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     try {
-      const { user } = await signInWithEmailAndPassword(auth, values.email, values.password);
-      console.log(user);
+      const { user: userCredentials } = await signInWithEmailAndPassword(auth, values.email, values.password);
+      const idToken = await userCredentials.getIdToken();
+      setAccountProfile({ ...values, uuid: userCredentials.uid, accessToken: idToken });
       actions.resetForm();
       actions.setSubmitting(false);
     }
@@ -49,8 +52,9 @@ export const Login: FC = () => {
 
   const handleMicrosoftLogin = async () => {
     try {
-      const { user } = await signInWithPopup(auth, authProvider);
-      console.log(user);
+      const { user: userCredentials } = await signInWithPopup(auth, authProvider);
+      const idToken = await userCredentials.getIdToken();
+      setAccountProfile({ uuid: userCredentials.uid, accessToken: idToken });
     }
     catch (error) {
       console.log(error);

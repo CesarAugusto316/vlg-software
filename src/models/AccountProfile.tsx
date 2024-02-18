@@ -1,4 +1,7 @@
 export interface AccountProfile {
+  id: number,
+  uuid: string;
+  accessToken: string;
   name: string;
   lastName: string;
   rut: string;
