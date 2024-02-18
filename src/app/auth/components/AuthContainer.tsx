@@ -27,7 +27,7 @@ export const AuthContainer: FC<AuthWrapperProps> = ({ children }) => {
         }
         if (accessToken && window.location.pathname === '/register') {
           setAccountProfile({ uuid: user.uid, accessToken });
-          // TODO: handle the case when the user is already registered
+          // TODO: handle the case when the user is already registered and page is refreshed
           // navigate('/');
         }
       }
