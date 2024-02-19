@@ -37,6 +37,8 @@ export const AuthContainer: FC<AuthWrapperProps> = ({ children }) => {
   }, []);
 
 
+  // Only ff AccountProfile isRemembered is set to true the user should be
+  // redirect to stay in home page even when trying to exit from the app
   useEffect(() => {
     // if (isAutenticated && window.location.pathname === '/login') {
     //   navigate('/');
@@ -44,7 +46,7 @@ export const AuthContainer: FC<AuthWrapperProps> = ({ children }) => {
     // if (isAutenticated && window.location.pathname === '/register') {
     //   navigate('/');
     // }
-  }, [isAutenticated]);
+  }, []);
 
 
   return (
