@@ -2,22 +2,21 @@ import { StateCreator } from 'zustand';
 import { AccountProfile } from '../../models/AccountProfile';
 
 
-const remenberAccountProfile = localStorage.getItem('remenberAccountProfile') || 'false';
+const remenberAccountProfile: string = localStorage.getItem('remenberAccountProfile') || 'false';
 
 export type AccountProfileSlice = {
   accountProfile: AccountProfile
   setAccountProfile: (user: Partial<AccountProfile>) => void,
-  resetAccountProfile: () => void
+  resetAccountProfile: () => void,
+  setIsRemembered: (isRemembered: boolean) => void,
 }
 
 export const createAccountProfileSlice: StateCreator<AccountProfileSlice> = (set) => ({
   accountProfile: {
-    remember: remenberAccountProfile ? JSON.parse(remenberAccountProfile) : false
+    isRemembered: JSON.parse(remenberAccountProfile)
   } as AccountProfile,
 
   setAccountProfile: (user: Partial<AccountProfile>) => {
-    localStorage.setItem('remenberAccountProfile', JSON.stringify(user.remember ?? false));
-
     set(prev => ({
       accountProfile: {
         ...prev.accountProfile,
@@ -26,7 +25,19 @@ export const createAccountProfileSlice: StateCreator<AccountProfileSlice> = (set
     }));
   },
 
+  setIsRemembered: (isRemembered: boolean) => {
+    localStorage.setItem('remenberAccountProfile', JSON.stringify(isRemembered));
+
+    set(prev => ({
+      accountProfile: {
+        ...prev.accountProfile,
+        isRemembered
+      }
+    }));
+  },
+
   resetAccountProfile: () => {
+    localStorage.removeItem('remenberAccountProfile');
     set({ accountProfile: {} as AccountProfile });
   }
 });

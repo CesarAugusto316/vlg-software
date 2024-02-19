@@ -7,7 +7,7 @@ export interface AccountProfile {
   rut: string;
   email: string;
   password: string;
-  remember: boolean
+  isRemembered: boolean
   organizationName: string;
   isAutenticated: boolean;
 }

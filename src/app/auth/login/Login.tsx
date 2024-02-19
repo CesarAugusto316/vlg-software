@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { faMicrosoft } from '@fortawesome/free-brands-svg-icons/faMicrosoft';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContainer } from '../components/AuthContainer';
 import { LogoTitle } from '../components/LogoTitle';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { Formik, Form, Field, FormikHelpers } from 'formik';
+import { Formik, Form, FormikHelpers } from 'formik';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 import { AccountProfile } from '../../../models/AccountProfile';
 // firebase
@@ -24,20 +24,19 @@ authProvider.setCustomParameters({ prompt: 'consent', tenant });
 type FormValues =
   Pick<AccountProfile, (
     'email' |
-    'password' |
-    'remember'
+    'password'
   )>
 
 const validationSchema = Yup.object<FormValues>({
   email: Yup.string().email('Ingresa un correo válido').required('Ingresa tu correo'),
   password: Yup.string().min(6).required('Ingresa tu contraseña'),
-  remember: Yup.boolean().optional().default(false),
 });
 
 
 export const Login: FC = () => {
-  const remember = useVlgStore(state => state.accountProfile?.remember);
-  const setAccountProfile = useVlgStore(state => state.setAccountProfile);
+  const isRemembered = useVlgStore(state => state.accountProfile?.isRemembered);
+  const setIsRemembered = useVlgStore(state => state.setIsRemembered);
+
 
   const handleEmailAndPassWordLogin = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     try {
@@ -49,6 +48,7 @@ export const Login: FC = () => {
       console.log(error);
     }
   };
+
 
   const handleMicrosoftLogin = async () => {
     try {
@@ -65,13 +65,9 @@ export const Login: FC = () => {
       <Formik
         onSubmit={handleEmailAndPassWordLogin}
         validationSchema={validationSchema}
-        initialValues={{ email: '', password: '', remember: remember ?? false }}
+        initialValues={{ email: '', password: '' }}
       >
-        {({ values }) => {
-          useEffect(() => {
-            setAccountProfile({ remember: values?.remember });
-          }, [values?.remember]);
-
+        {() => {
           return (
             <Form className=" form-container -mt-4 w-[448px]">
               <ul className="flex flex-col gap-4">
@@ -116,9 +112,11 @@ export const Login: FC = () => {
 
                 <li className="flex items-center">
                   <div className="flex items-center h-5">
-                    <Field
+                    <input
                       id="remember"
                       name="remember"
+                      checked={isRemembered}
+                      onChange={(e) => setIsRemembered(e.target.checked)}
                       type="checkbox"
                       className="checkbox-primary"
                     />

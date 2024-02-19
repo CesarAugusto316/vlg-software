@@ -33,7 +33,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
 
     const cleanUp = () => {
       unsubscribe && unsubscribe();
-      if (!accountProfile?.remember) {
+      if (!accountProfile?.isRemembered) {
         signOut(auth);
       }
     };
