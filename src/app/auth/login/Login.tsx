@@ -4,16 +4,17 @@ import { faMicrosoft } from '@fortawesome/free-brands-svg-icons/faMicrosoft';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContainer } from '../components/AuthContainer';
 import { LogoTitle } from '../components/LogoTitle';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form, FormikHelpers } from 'formik';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 import { AccountProfile } from '../../../models/AccountProfile';
 // firebase
 import { auth } from '../../../firebase/firebaseConfig';
-import { OAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
+import { OAuthProvider, signInWithPopup, signInWithEmailAndPassword, getAdditionalUserInfo } from 'firebase/auth';
 import { tenant } from '../../../constants';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
+import { useSlides } from '../register/useSlidesHook';
 
 
 const authProvider = new OAuthProvider('microsoft.com');
@@ -36,6 +37,8 @@ const validationSchema = Yup.object<FormValues>({
 export const Login: FC = () => {
   const isRemembered = useVlgStore(state => state.accountProfile?.isRemembered);
   const setIsRemembered = useVlgStore(state => state.setIsRemembered);
+  const navigate = useNavigate();
+  const setSlideIndex = useSlides(state => state.setIndex);
 
 
   const handleEmailAndPassWordLogin = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
@@ -52,7 +55,12 @@ export const Login: FC = () => {
 
   const handleMicrosoftLogin = async () => {
     try {
-      await signInWithPopup(auth, authProvider);
+      const res = await signInWithPopup(auth, authProvider);
+      const isNewUser = getAdditionalUserInfo(res)?.isNewUser ?? false;
+      if (isNewUser) {
+        setSlideIndex(1);
+        navigate('/register');
+      }
     }
     catch (error) {
       console.log(error);

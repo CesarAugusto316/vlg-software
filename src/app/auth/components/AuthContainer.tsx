@@ -38,12 +38,12 @@ export const AuthContainer: FC<AuthWrapperProps> = ({ children }) => {
 
 
   useEffect(() => {
-    if (isAutenticated && window.location.pathname === '/login') {
-      navigate('/');
-    }
-    if (isAutenticated && window.location.pathname === '/register') {
-      navigate('/');
-    }
+    // if (isAutenticated && window.location.pathname === '/login') {
+    //   navigate('/');
+    // }
+    // if (isAutenticated && window.location.pathname === '/register') {
+    //   navigate('/');
+    // }
   }, [isAutenticated]);
 
 

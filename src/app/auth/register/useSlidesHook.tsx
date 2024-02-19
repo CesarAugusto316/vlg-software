@@ -9,12 +9,15 @@ type SlidesStore = {
   onNextSlide: () => void;
   onPrevSlide: () => void;
   setFirstRender: () => void;
+  setIndex: (index: number) => void;
 }
 
 export const useSlides = create<SlidesStore>((set) => ({
   index: 0,
   direction: 1,
   firstRender: true,
+
+  setIndex: (index: number) => set({ index }),
 
   onNextSlide: () => {
     set({ direction: 1 }); // Set direction to 1 when going to next slide
