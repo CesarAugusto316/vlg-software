@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
 
-export const App: FC = () => {
+export const Accounting: FC = () => {
   return (
     <div>
-      <h1>Hello World</h1>
+      <h1>Accounting</h1>
     </div>
   );
 };
