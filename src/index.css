@@ -20,9 +20,21 @@
   h3 {
     @apply text-xl font-extrabold;
   }
+
+  h4 {
+    @apply text-lg font-semibold;
+  }
 }
 
 @layer components {
+  .nav-link {
+    @apply text-gray-vlg-400 flex items-center gap-2 p-2 px-5 py-3 hover:text-gray-vlg-400 hover:bg-gray-vlg-100;
+  }
+
+  .nav-link--active {
+    @apply bg-gray-vlg-100 font-semibold;
+  }
+
   .btn-light {
     @apply hover:text-blue-vlg-600 gap-2 flex items-center justify-center shadow-sm w-full bg-white border border-gray-vlg-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5   dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700;
   }

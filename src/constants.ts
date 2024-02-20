@@ -7,3 +7,5 @@ export const messagingSenderId = import.meta.env.VITE_MESSAGING_SENDER_ID;
 export const appId = import.meta.env.VITE_APP_ID;
 export const measurementId = import.meta.env.VITE_MEASUREMENT_ID;
 export const tenant = import.meta.env.VITE_AZURE_TENANT;
+
+export const defaultImagePlaceholder = 'https://via.placeholder.com/150';
