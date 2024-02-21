@@ -1,10 +1,45 @@
 import { FC } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebaseConfig';
 import { useVlgStore } from '../vlgStore/vlgStore';
 import logoImg from '../assets/icons/vlg-logo.png';
 import { defaultImagePlaceholder } from '../constants';
+import companiesLogo from '../assets/icons/company.png';
+import operationslogo from '../assets/icons/operations.png';
+import accountingLogo from '../assets/icons/accounting.png';
+import usersLogo from '../assets/icons/users.png';
+import maintainersLogo from '../assets/icons/maintainers.png';
+import { ForEach } from './utils/ForEach';
+
+
+const links = [
+  {
+    path: '/companies',
+    name: 'Empresas',
+    icon: companiesLogo
+  },
+  {
+    path: '/',
+    name: 'Operaciones',
+    icon: operationslogo
+  },
+  {
+    path: '/accounting',
+    name: 'Contabilidad',
+    icon: accountingLogo
+  },
+  {
+    path: '/users-and-roles',
+    name: 'Usuarios y roles',
+    icon: usersLogo
+  },
+  {
+    path: '/maintainers',
+    name: 'Mantenedores',
+    icon: maintainersLogo
+  }
+];
 
 
 export const Sidebar: FC = () => {
@@ -20,7 +55,7 @@ export const Sidebar: FC = () => {
   };
 
   return (
-    <aside className="h-full border border-gray-vlg-200">
+    <aside className="h-full border border-gray-vlg-200 overflow-x-hidden">
 
       <nav className="relative h-full flex flex-col justify-between">
 
@@ -31,45 +66,18 @@ export const Sidebar: FC = () => {
           </div>
 
           <ul className="font-medium flex flex-col gap-0.5 pt-4">
-            <NavLink
-              to={'/companies'}
-              className={({ isActive }) => `nav-link ${isActive && 'nav-link--active'}`}
-            >
-              <img className="h-5 w-5 rounded-full" src={defaultImagePlaceholder} alt="empresas" />
-              Empresas
-            </NavLink>
-
-            <NavLink
-              to={'/'}
-              className={({ isActive }) => `nav-link ${isActive && 'nav-link--active'}`}
-            >
-              <img className="h-5 w-5 rounded-full" src={defaultImagePlaceholder} alt="operaciones" />
-              Operaciones
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) => `nav-link ${isActive && 'nav-link--active'}`}
-              to={'/accounting'}
-            >
-              <img className="h-5 w-5 rounded-full" src={defaultImagePlaceholder} alt="contabilidad" />
-              Contabilidad
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) => `nav-link ${isActive && 'nav-link--active'}`}
-              to={'/users-and-roles'}
-            >
-              <img className="h-5 w-5 rounded-full" src={defaultImagePlaceholder} alt="users" />
-              Usuarios y roles
-            </NavLink>
-
-            <NavLink
-              className={({ isActive }) => `nav-link ${isActive && 'nav-link--active'}`}
-              to={'/maintainers'}
-            >
-              <img className="h-5 w-5 rounded-full" src={defaultImagePlaceholder} alt="matainers" />
-              Mantenedores
-            </NavLink>
+            <ForEach items={links}>
+              {({ icon, name, path }) => (
+                <NavLink
+                  key={name}
+                  to={path}
+                  className={({ isActive }) => `nav-link ${isActive && 'nav-link--active'}`}
+                >
+                  <img className="h-6 w-6 rounded-full" src={icon ?? defaultImagePlaceholder} alt={`${name}-icon`} />
+                  <span>{name}</span>
+                </NavLink>
+              )}
+            </ForEach>
           </ul>
         </section>
 

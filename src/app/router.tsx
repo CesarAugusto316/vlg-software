@@ -24,7 +24,6 @@ export const router = createBrowserRouter([
       { path: '/maintainers', element: <Maintainers /> },
       { path: '/accounting', element: <Accounting /> },
       { path: 'users-and-roles', element: <UsersAndRoles /> }
-
     ]
   },
 

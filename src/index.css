@@ -28,7 +28,7 @@
 
 @layer components {
   .nav-link {
-    @apply min-w-[192px] text-gray-vlg-400 flex items-center gap-2 p-2 px-5 py-3 hover:text-gray-vlg-400 hover:bg-gray-vlg-100;
+    @apply min-w-[192px] text-gray-vlg-400 flex items-center gap-2 p-2 px-5 py-3 hover:text-gray-vlg-400 hover:font-semibold hover:bg-gray-vlg-100 hover:scale-[103%] hover:transition-all active:scale-100;
   }
 
   .nav-link--active {
