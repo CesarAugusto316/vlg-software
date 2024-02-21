@@ -83,8 +83,10 @@ export const Sidebar: FC = () => {
 
         <section className="py-6 px-5">
           <button
+            type="button"
             onClick={handleSignOut}
-            className="btn-primary">
+            className="btn-primary"
+          >
             Sign Out
           </button>
         </section>

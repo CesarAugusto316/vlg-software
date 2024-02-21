@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 
 interface IfProps<T> {
-  condition: T extends boolean ? T : boolean;
+  condition: boolean | T;
   children?: ReactNode;
   render?: ReactNode;
   elseRender?: ReactNode;
