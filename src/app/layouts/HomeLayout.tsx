@@ -12,7 +12,7 @@ export const HomeLayout: FC = () => {
       <main className="flex-1 flex flex-col">
         <Navbar />
 
-        <div className="p-6 flex-1">
+        <div className="p-8 flex-1">
           <Outlet />
         </div>
       </main>

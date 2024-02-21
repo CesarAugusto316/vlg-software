@@ -18,11 +18,13 @@ export const Navbar: FC = () => {
           </button>
         </li>
         <li>
-          <span
-            className="bg-gray-vlg-300 rounded-full p-2 font-bold text-sm text-blue-vlg-900"
-          >
-            FC
-          </span>
+          <button>
+            <span
+              className="bg-gray-vlg-300 rounded-full p-2 font-bold text-sm text-blue-vlg-900"
+            >
+              FC
+            </span>
+          </button>
         </li>
       </ul>
     </menu>
