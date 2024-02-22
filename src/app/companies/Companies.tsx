@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { CreateModule } from '../../components/CreateModule';
+import { CreateSection } from '../../components/CreateSection';
 
 
 export const Companies: FC = () => {
   return (
     <div>
-      <CreateModule
+      <CreateSection
         title="Empresas"
         subtitle="Estas son todas las empresas que existen en tu organización"
         btn1Text="Crear Empresa"

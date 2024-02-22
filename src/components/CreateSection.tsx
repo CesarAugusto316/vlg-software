@@ -6,14 +6,14 @@ import { If } from './utils/IfElse';
 import { HorizontalSeparator } from './HorizontalSeparator';
 
 
-interface CreateModuleProps {
+interface CreateSectionProps {
   title: string;
   subtitle: string;
   btn1Text?: string;
   btn2Text: string;
 }
 
-export const CreateModule: FC<CreateModuleProps> = ({ btn2Text, subtitle, title, btn1Text }) => {
+export const CreateSection: FC<CreateSectionProps> = ({ btn2Text, subtitle, title, btn1Text }) => {
   return (
     <div>
       <HorizontalSeparator direction="up">
