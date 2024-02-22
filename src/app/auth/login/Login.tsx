@@ -36,6 +36,7 @@ const validationSchema = Yup.object<FormValues>({
 
 export const Login: FC = () => {
   const isRemembered = useVlgStore(state => state.accountProfile?.isRemembered);
+  const setAccountProfile = useVlgStore(state => state.setAccountProfile);
   const setIsRemembered = useVlgStore(state => state.setIsRemembered);
   const navigate = useNavigate();
   const setSlideIndex = useSlides(state => state.setIndex);
@@ -43,9 +44,11 @@ export const Login: FC = () => {
 
   const handleEmailAndPassWordLogin = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
+      const res = await signInWithEmailAndPassword(auth, values.email, values.password);
+      setAccountProfile({ accessToken: await res.user.getIdToken(), uuid: res.user.uid });
       actions.resetForm();
       actions.setSubmitting(false);
+      navigate('/');
     }
     catch (error) {
       console.log(error);
@@ -56,10 +59,15 @@ export const Login: FC = () => {
   const handleMicrosoftLogin = async () => {
     try {
       const res = await signInWithPopup(auth, authProvider);
+      setAccountProfile({ accessToken: await res.user.getIdToken(), uuid: res.user.uid });
+
       const isNewUser = getAdditionalUserInfo(res)?.isNewUser ?? false;
       if (isNewUser) {
         setSlideIndex(1);
         navigate('/register');
+      }
+      else {
+        navigate('/');
       }
     }
     catch (error) {

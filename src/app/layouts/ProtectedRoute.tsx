@@ -23,7 +23,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       if (user) {
         console.log('user is logged in', user);
         const accessToken = await user.getIdToken();
-        setAccessToken({ ...accountProfile, accessToken, uuid: user.uid, isAutenticated: true });
+        setAccessToken({ ...accountProfile, accessToken, uuid: user.uid });
       }
       else {
         console.log('user is not logged in');
@@ -32,14 +32,12 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     });
 
     const cleanUp = () => {
-      unsubscribe && unsubscribe();
-      if (!accountProfile?.isRemembered) {
-        signOut(auth);
-      }
+      if (unsubscribe) unsubscribe();
+      if (!accountProfile?.isRemembered) signOut(auth);
     };
     return cleanUp;
 
-  }, [accountProfile]);
+  }, []);
 
 
   if (!accountProfile.accessToken) return null;

@@ -38,6 +38,10 @@ export const createAccountProfileSlice: StateCreator<AccountProfileSlice> = (set
 
   resetAccountProfile: () => {
     localStorage.removeItem('remenberAccountProfile');
-    set({ accountProfile: {} as AccountProfile });
+    set({
+      accountProfile: {
+        isRemembered: false
+      } as AccountProfile
+    });
   }
 });
