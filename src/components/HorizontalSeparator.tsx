@@ -10,7 +10,7 @@ export const HorizontalSeparator: FC<HorizontalSeparatorProps> = ({ direction, c
   const directionClass = direction === 'up' ? 'rounded-t-2xl border-b-2' : 'rounded-b-2xl border-t-2';
   const classWithChildren = children ? 'py-5 px-6' : 'h-6';
   return (
-    <div className={`${directionClass} ${classWithChildren} flex gap-4 justify-between bg-gray-vlg-100/65 border-gray-vlg-200/80`}>
+    <div className={`${directionClass} ${classWithChildren} flex gap-4 justify-between bg-gray-vlg-100/65 border-gray-vlg-200/95`}>
       {children}
     </div>
   );

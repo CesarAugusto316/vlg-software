@@ -12,21 +12,6 @@ import { auth } from '../../../firebase/firebaseConfig';
 import { If } from '../../../components/utils/IfElse';
 
 
-const searchParamsSchemma = Yup.object({
-  microsoft:
-    Yup.boolean()
-      .optional()
-      .transform((originalValue) => {
-        // Coerce string to number if it's a parsable number
-        if (typeof originalValue === 'string' && (originalValue === 'true' || originalValue === 'false')) {
-          return JSON.parse(originalValue); // boolean
-        }
-        // Otherwise, leave it as is
-        return undefined;
-      }),
-});
-
-
 type FormValues = Pick<AccountProfile, 'organizationName'>
 
 const initialValues: FormValues = {
@@ -43,8 +28,9 @@ export const Slide2: FC = () => {
   const setAccountProfile = useVlgStore(state => state.setAccountProfile);
   const onPrevSlide = useSlides(state => state.onPrevSlide);
   const onNextSlide = useSlides(state => state.onNextSlide);
-  const urlParams = useSearchParams();
-  const isMicrosoftRegistration = searchParamsSchemma.validateSync(urlParams)?.microsoft ?? false;
+  const [urlParams] = useSearchParams();
+  console.log(urlParams.get('microsoft'));
+  const isMicrosoftRegistration = Boolean(urlParams.get('microsoft')) ?? false;
 
 
   const handleCreateAccount = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
