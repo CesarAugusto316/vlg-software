@@ -37,7 +37,7 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     };
     return cleanUp;
 
-  }, []);
+  }, [accountProfile?.accessToken]);
 
 
   if (!accountProfile.accessToken) return null;
