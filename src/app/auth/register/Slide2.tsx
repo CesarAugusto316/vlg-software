@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { LogoTitle } from '../components/LogoTitle';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 import { Formik, FormikHelpers, Form } from 'formik';
 import * as Yup from 'yup';
@@ -9,6 +9,22 @@ import { useVlgStore } from '../../../vlgStore/vlgStore';
 import { useSlides } from './useSlidesHook';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase/firebaseConfig';
+import { If } from '../../../components/utils/IfElse';
+
+
+const searchParamsSchemma = Yup.object({
+  microsoft:
+    Yup.boolean()
+      .optional()
+      .transform((originalValue) => {
+        // Coerce string to number if it's a parsable number
+        if (typeof originalValue === 'string' && (originalValue === 'true' || originalValue === 'false')) {
+          return JSON.parse(originalValue); // boolean
+        }
+        // Otherwise, leave it as is
+        return undefined;
+      }),
+});
 
 
 type FormValues = Pick<AccountProfile, 'organizationName'>
@@ -27,12 +43,17 @@ export const Slide2: FC = () => {
   const setAccountProfile = useVlgStore(state => state.setAccountProfile);
   const onPrevSlide = useSlides(state => state.onPrevSlide);
   const onNextSlide = useSlides(state => state.onNextSlide);
+  const urlParams = useSearchParams();
+  const isMicrosoftRegistration = searchParamsSchemma.validateSync(urlParams)?.microsoft ?? false;
 
 
   const handleCreateAccount = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
     try {
-      await createUserWithEmailAndPassword(auth, accountProfile.email, accountProfile.password);
+      if (!isMicrosoftRegistration) {
+        await createUserWithEmailAndPassword(auth, accountProfile.email, accountProfile.password);
+      }
       setAccountProfile({ ...values });
+      // TODO: mutation to create organization
       actions.setSubmitting(false);
       actions.resetForm();
       onNextSlide();
@@ -57,7 +78,15 @@ export const Slide2: FC = () => {
             </div>
 
             <div>
-              <h2>Crea tu cuenta</h2>
+              <If
+                condition={isMicrosoftRegistration}
+                render={(
+                  <h2>Completa tu cuenta</h2>
+                )}
+                elseRender={(
+                  <h2>Crea tu cuenta</h2>
+                )}
+              />
               <p>Ahora los datos de tu organización</p>
             </div>
           </div>
@@ -77,19 +106,24 @@ export const Slide2: FC = () => {
                 type="submit"
                 className="btn-primary"
               >
-                {/* SHOW LOADING MESSAGE */}
+                {/* SHOW LOADING MESSAGE WITH useQuery hook */}
                 Crear cuenta
               </button>
             </li>
 
-            <li>
-              <button
-                type="button"
-                onClick={onPrevSlide}
-                className="btn-light-no-border">
-                Volver a Mis Datos
-              </button>
-            </li>
+            <If
+              condition={!isMicrosoftRegistration}
+              render={(
+                <li>
+                  <button
+                    type="button"
+                    onClick={onPrevSlide}
+                    className="btn-light-no-border">
+                    Volver a Mis Datos
+                  </button>
+                </li>
+              )}
+            />
 
             <li>
               <Link className="btn-light-no-border" to="/login">Volver al Login</Link>

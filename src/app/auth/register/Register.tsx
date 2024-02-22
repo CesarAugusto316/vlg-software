@@ -8,8 +8,6 @@ import { slidesList } from './SlidesList';
 export const Register: FC = () => {
   const index = useSlides(state => state.index);
   const direction = useSlides(state => state.direction);
-  // const firstRender = useSlides(state => state.firstRender);
-  // const setFirstRender = useSlides(state => state.setFirstRender);
 
   const transRef = useSpringRef();
   const transitions = useTransition(index, {
@@ -22,10 +20,6 @@ export const Register: FC = () => {
 
   useEffect(() => {
     transRef.start();
-    // In order for this to work properly, we need to set firstRender to false after the first render
-    // but in a parent component
-
-    // setFirstRender(); // Set firstRender to false after first render
   }, [index, transRef]);
 
 

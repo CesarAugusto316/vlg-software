@@ -1,15 +1,11 @@
 import { FC } from 'react';
 import { LogoTitle } from '../components/LogoTitle';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
+import { Link } from 'react-router-dom';
 
 
 export const Slide3: FC = () => {
   const { name } = useVlgStore(state => state.accountProfile);
-  const setIsAuthenticated = useVlgStore(state => state.setAccountProfile);
-
-  const handleNavigation = () => {
-    setIsAuthenticated({ isAutenticated: true });
-  };
 
   return (
     <div className=" form-container -mt-4 w-[680px] flex flex-col gap-4">
@@ -29,13 +25,9 @@ export const Slide3: FC = () => {
 
       </div>
 
-      <button
-        onClick={handleNavigation}
-        type="button"
-        className="btn-primary"
-      >
+      <Link to="/" className="btn-primary">
         Ingresar ahora
-      </button>
+      </Link>
     </div>
   );
 };

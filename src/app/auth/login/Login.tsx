@@ -64,7 +64,7 @@ export const Login: FC = () => {
       const isNewUser = getAdditionalUserInfo(res)?.isNewUser ?? false;
       if (isNewUser) {
         setSlideIndex(1);
-        navigate('/register');
+        navigate('/register?microsoft=true');
       }
       else {
         navigate('/');
