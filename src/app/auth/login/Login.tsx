@@ -46,9 +46,8 @@ export const Login: FC = () => {
     try {
       const res = await signInWithEmailAndPassword(auth, values.email, values.password);
       setAccountProfile({ accessToken: await res.user.getIdToken(), uuid: res.user.uid });
-      actions.resetForm();
       actions.setSubmitting(false);
-      navigate('/');
+      setTimeout(() => navigate('/'), 200);
     }
     catch (error) {
       console.log(error);
@@ -67,7 +66,7 @@ export const Login: FC = () => {
         navigate('/register?microsoft=true');
       }
       else {
-        navigate('/');
+        setTimeout(() => navigate('/'), 500);
       }
     }
     catch (error) {

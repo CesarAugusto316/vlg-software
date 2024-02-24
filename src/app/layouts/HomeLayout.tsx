@@ -12,9 +12,10 @@ export const HomeLayout: FC = () => {
 
   const transition = useTransition(accessToken, {
     keys: null,
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    config: { duration: 400, mass: 1, tension: 180, friction: 12 },
+    from: { opacity: 0, transform: 'translate3d(0, 2.8%, 0)' },
+    enter: { opacity: 1, transform: 'translate3d(0,0,0)' },
+    leave: { opacity: 0, transform: 'translate3d(0, -2.8%, 0)' },
+    config: { mass: 1.4, tension: 210 },
   });
 
   return transition((style, item) => (
