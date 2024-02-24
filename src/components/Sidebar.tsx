@@ -1,8 +1,5 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase/firebaseConfig';
-import { useVlgStore } from '../vlgStore/vlgStore';
 import logoImg from '../assets/icons/vlg-logo.png';
 import { defaultImagePlaceholder } from '../constants';
 import companiesLogo from '../assets/icons/company.png';
@@ -43,17 +40,6 @@ const links = [
 
 
 export const Sidebar: FC = () => {
-  const resetAccountProfile = useVlgStore(state => state.resetAccountProfile);
-
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-      resetAccountProfile();
-    } catch (error) {
-      console.error('Error signing out', error);
-    }
-  };
-
   return (
     <aside className="h-full border border-gray-vlg-200 overflow-x-hidden">
 
@@ -79,16 +65,6 @@ export const Sidebar: FC = () => {
               )}
             </ForEach>
           </ul>
-        </section>
-
-        <section className="py-6 px-5">
-          <button
-            type="button"
-            onClick={handleSignOut}
-            className="btn-primary"
-          >
-            Sign Out
-          </button>
         </section>
       </nav>
     </aside>

@@ -7,6 +7,11 @@
 @layer base {
   body {
     @apply text-sm font-sans text-gray-vlg-400 dark:text-white;
+    /* scrollbar-width: thin; */
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
   }
 
   a {
@@ -69,5 +74,13 @@
 
   .form-container {
     @apply bg-white p-8 rounded-xl border-gray-vlg-100 border-2;
+  }
+
+  .createSection__title {
+    @apply text-blue-vlg-900 mb-2 font-bold;
+  }
+
+  .createSection__sub-title {
+    @apply text-sm;
   }
 }

@@ -3,34 +3,9 @@ import { LogoTitle } from '../components/LogoTitle';
 import { Link } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 import { Formik, FormikHelpers, Form } from 'formik';
-import * as Yup from 'yup';
-import { AccountProfile } from '../../../models/AccountProfile';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
 import { useSlides } from './useSlidesHook';
-
-
-interface FormValues extends Pick<AccountProfile, (
-  'name' |
-  'lastName' |
-  'rut' |
-  'email' |
-  'password'
-)> {
-  rePassword: string;
-}
-
-
-const validationSchema = Yup.object<FormValues>({
-  name: Yup.string().required('Ingresa tus nombres'),
-  lastName: Yup.string().required('Ingresa tus apellidos'),
-  rut: Yup.string().required('Ingresa tu RUT'),
-  email: Yup.string().email('Ingresa un correo válido').required('Ingresa tu correo'),
-  password: Yup.string().min(6).required('Ingresa tu contraseña'),
-  rePassword:
-    Yup.string()
-      .oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden')
-      .required('Repite tu contraseña'),
-});
+import { AccountProfileFormValues, validationSchema } from './validationSchemma';
 
 
 export const Slide1: FC = () => {
@@ -38,7 +13,7 @@ export const Slide1: FC = () => {
   const setAccountProfile = useVlgStore(state => state.setAccountProfile);
   const onNextSlide = useSlides(state => state.onNextSlide);
 
-  const initialValues: FormValues = {
+  const initialValues: AccountProfileFormValues = {
     name: accountProfile.name ?? '',
     lastName: accountProfile.lastName ?? '',
     rut: accountProfile.rut ?? '',
@@ -47,7 +22,7 @@ export const Slide1: FC = () => {
     rePassword: accountProfile.password ?? '',
   };
 
-  const handleNextStep = (values: FormValues, actions: FormikHelpers<FormValues>) => {
+  const handleNextStep = (values: AccountProfileFormValues, actions: FormikHelpers<AccountProfileFormValues>) => {
     setAccountProfile(values);
     actions.setSubmitting(true);
     onNextSlide();

@@ -18,8 +18,8 @@ export const CreateSection: FC<CreateSectionProps> = ({ btn2Text, subtitle, titl
     <div>
       <HorizontalSeparator direction="up">
         <div>
-          <h4 className="text-blue-vlg-900 mb-2 font-bold">{title}</h4>
-          <p className="text-sm">{subtitle}</p>
+          <h4 className="createSection__title">{title}</h4>
+          <p className="createSection__sub-title">{subtitle}</p>
         </div>
 
         <div>
