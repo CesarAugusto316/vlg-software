@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import companiesIcon from '../assets/icons/company.png';
+import { Link } from 'react-router-dom';
 
 
 export const Navbar: FC = () => {
@@ -19,13 +20,13 @@ export const Navbar: FC = () => {
         </li>
 
         <li>
-          <button type="button">
+          <Link to="/account-profile">
             <span
               className="bg-gray-vlg-300 rounded-full p-2 font-bold text-sm text-blue-vlg-900"
             >
               FC
             </span>
-          </button>
+          </Link>
         </li>
       </ul>
     </menu>

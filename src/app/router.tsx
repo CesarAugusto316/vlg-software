@@ -7,11 +7,12 @@ import { ProtectedRoute } from './layouts/ProtectedRoute';
 import { Maintainers } from './maintainers/Maintainers';
 import { Accounting } from './accounting/Accounting';
 import { UsersAndRoles } from './usersAndRoles/UsersAndRoles';
+import { AccountProfile } from './accountProfile/AccountProfile';
 
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: '',
     element: (
       <ProtectedRoute>
         <HomeLayout />
@@ -23,7 +24,8 @@ export const router = createBrowserRouter([
       { path: '/operations', element: <Operations /> },
       { path: '/maintainers', element: <Maintainers /> },
       { path: '/accounting', element: <Accounting /> },
-      { path: 'users-and-roles', element: <UsersAndRoles /> }
+      { path: '/users-and-roles', element: <UsersAndRoles /> },
+      { path: '/account-profile', element: <AccountProfile /> },
     ]
   },
 
