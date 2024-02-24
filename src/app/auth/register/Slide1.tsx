@@ -5,7 +5,7 @@ import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage
 import { Formik, FormikHelpers, Form } from 'formik';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
 import { useSlides } from './useSlidesHook';
-import { AccountProfileFormValues, validationSchema } from './validationSchemma';
+import { AccountProfileFormValues, accountValidationSchema } from './validationSchemma';
 
 
 export const Slide1: FC = () => {
@@ -30,7 +30,7 @@ export const Slide1: FC = () => {
 
   return (
     <Formik
-      validationSchema={validationSchema}
+      validationSchema={accountValidationSchema}
       initialValues={initialValues}
       onSubmit={handleNextStep}
     >

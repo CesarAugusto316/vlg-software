@@ -13,7 +13,7 @@ export interface AccountProfileFormValues extends Pick<AccountProfile, (
 }
 
 
-export const validationSchema = Yup.object<AccountProfileFormValues>({
+export const accountValidationSchema = Yup.object<AccountProfileFormValues>({
   name: Yup.string().required('Ingresa tus nombres'),
   lastName: Yup.string().required('Ingresa tus apellidos'),
   rut: Yup.string().required('Ingresa tu RUT'),
@@ -23,4 +23,12 @@ export const validationSchema = Yup.object<AccountProfileFormValues>({
     Yup.string()
       .oneOf([Yup.ref('password'), ''], 'Las contraseñas no coinciden')
       .required('Repite tu contraseña'),
+});
+
+
+export type OrganizationFormValues = Pick<AccountProfile, 'organizationName'>
+
+
+export const organizationValidationSchema = Yup.object<OrganizationFormValues>({
+  organizationName: Yup.string().required('Ingresa un nombre'),
 });

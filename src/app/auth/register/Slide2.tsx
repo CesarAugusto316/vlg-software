@@ -3,24 +3,17 @@ import { LogoTitle } from '../components/LogoTitle';
 import { Link, useSearchParams } from 'react-router-dom';
 import { FieldWithErrorMessage } from '../../../components/FieldWithErrorMessage';
 import { Formik, FormikHelpers, Form } from 'formik';
-import * as Yup from 'yup';
-import { AccountProfile } from '../../../models/AccountProfile';
 import { useVlgStore } from '../../../vlgStore/vlgStore';
 import { useSlides } from './useSlidesHook';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../firebase/firebaseConfig';
 import { If } from '../../../components/utils/IfElse';
+import { OrganizationFormValues, organizationValidationSchema } from './validationSchemma';
 
 
-type FormValues = Pick<AccountProfile, 'organizationName'>
-
-const initialValues: FormValues = {
+const initialValues: OrganizationFormValues = {
   organizationName: '',
 };
-
-const validationSchema = Yup.object<FormValues>({
-  organizationName: Yup.string().required('Ingresa un nombre'),
-});
 
 
 export const Slide2: FC = () => {
@@ -33,7 +26,7 @@ export const Slide2: FC = () => {
   const isMicrosoftRegistration = Boolean(urlParams.get('microsoft')) ?? false;
 
 
-  const handleCreateAccount = async (values: FormValues, actions: FormikHelpers<FormValues>) => {
+  const handleCreateAccount = async (values: OrganizationFormValues, actions: FormikHelpers<OrganizationFormValues>) => {
     try {
       if (!isMicrosoftRegistration) {
         await createUserWithEmailAndPassword(auth, accountProfile.email, accountProfile.password);
@@ -41,7 +34,6 @@ export const Slide2: FC = () => {
       setAccountProfile({ ...values });
       // TODO: mutation to create organization
       actions.setSubmitting(false);
-      actions.resetForm();
       onNextSlide();
     }
     catch (error) {
@@ -52,7 +44,7 @@ export const Slide2: FC = () => {
 
   return (
     <Formik
-      validationSchema={validationSchema}
+      validationSchema={organizationValidationSchema}
       initialValues={initialValues}
       onSubmit={handleCreateAccount}
     >
