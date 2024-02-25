@@ -1,10 +1,9 @@
-import { useTransition, animated } from '@react-spring/web';
 import { FC } from 'react';
 
 
-export const CreateCompanyForm: FC = () => {
+export const CreateCompanyStepForm: FC = () => {
   return (
-    <div>
+    <div className="bg-white p-6 rounded-lg">
       <h1>Hello World</h1>
     </div>
   );

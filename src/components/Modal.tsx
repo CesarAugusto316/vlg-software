@@ -12,22 +12,10 @@ interface ModalProps {
 export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   const transition = useTransition(isOpen, {
-    from: {
-      y: '200%',
-      opacity: 0,
-    },
-    enter: {
-      y: '0%',
-      opacity: 1,
-    },
-    leave: {
-      y: '200%',
-      opacity: 0,
-    },
-    config: {
-      tension: 260,
-      mass: 2
-    }
+    from: { y: '200%', opacity: 0 },
+    enter: { y: '0%', opacity: 1 },
+    leave: { y: '200%', opacity: 0 },
+    config: { tension: 260, mass: 2 }
   });
 
   const AnimatedModal: FC = () => transition((style, isOpen) => (

@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Register, Login } from './auth/index';
 import { HomeLayout } from './layouts/HomeLayout';
 import { Operations } from './operations/Operations';
-import { Companies } from './companies/Companies';
+import { CompaniesPage } from './companies/CompaniesPage';
 import { ProtectedRoute } from './layouts/ProtectedRoute';
 import { Maintainers } from './maintainers/Maintainers';
 import { Accounting } from './accounting/Accounting';
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       { path: '/', element: <Operations /> },
-      { path: '/companies', element: <Companies /> },
+      { path: '/companies', element: <CompaniesPage /> },
       { path: '/operations', element: <Operations /> },
       { path: '/maintainers', element: <Maintainers /> },
       { path: '/accounting', element: <Accounting /> },

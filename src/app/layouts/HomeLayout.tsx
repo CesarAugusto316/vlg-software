@@ -11,10 +11,12 @@ export const HomeLayout: FC = () => {
   const accessToken = useVlgStore(state => state.accountProfile?.accessToken);
 
   const transition = useTransition(accessToken, {
-    keys: null,
-    from: { opacity: 0, transform: 'translate3d(0, 2.8%, 0)' },
-    enter: { opacity: 1, transform: 'translate3d(0,0,0)' },
-    leave: { opacity: 0, transform: 'translate3d(0, -2.8%, 0)' },
+    // from: { opacity: 0, transform: 'translate3d(0, 3%, 0)' },
+    // enter: { opacity: 1, transform: 'translate3d(0,0,0)' },
+    // leave: { opacity: 0, transform: 'translate3d(0, -3%, 0)' },
+    from: { y: '3%', opacity: 0 },
+    enter: { y: '0%', opacity: 1 },
+    leave: { y: '3%', opacity: 0 },
     config: { mass: 1.4, tension: 210 },
   });
 

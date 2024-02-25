@@ -1,9 +1,10 @@
 import { FC, useState } from 'react';
 import { CreateSection } from '../../components/CreateSection';
 import { Modal } from '../../components/Modal';
+import { CreateCompanyStepForm } from './CreateCompanyForm';
 
 
-export const Companies: FC = () => {
+export const CompaniesPage: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -16,9 +17,7 @@ export const Companies: FC = () => {
       />
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <div className="bg-white p-6 rounded-lg">
-          <h1>Modal</h1>
-        </div>
+        <CreateCompanyStepForm />
       </Modal>
     </div>
   );
