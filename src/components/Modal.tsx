@@ -6,8 +6,8 @@ import { createPortal } from 'react-dom';
 const DEFAULT_TRANSITION_CONFIG = {
   from: { y: '100%', opacity: 0 },
   enter: { y: '0%', opacity: 1 },
-  leave: { y: '140%', opacity: 0 },
-  config: { tension: 170, mass: 1.7 }
+  leave: { y: '120%', opacity: 0 },
+  config: { tension: 160, mass: 1.6 }
 };
 
 

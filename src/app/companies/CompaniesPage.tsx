@@ -17,7 +17,7 @@ export const CompaniesPage: FC = () => {
       />
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <CreateCompanyStepForm />
+        <CreateCompanyStepForm onCancelar={() => setIsOpen(false)} onContinue={() => undefined} />
       </Modal>
     </div>
   );
