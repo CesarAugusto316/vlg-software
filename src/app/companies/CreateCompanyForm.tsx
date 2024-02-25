@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { HorizontalSeparator } from '../../components/HorizontalSeparator';
-import { Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { FieldWithErrorMessage } from '../../components/FieldWithErrorMessage';
 
 interface CreateCompanyStepFormProps {
@@ -14,7 +14,7 @@ export const CreateCompanyStepForm: FC<CreateCompanyStepFormProps> = ({ onCancel
   return (
     <div className="bg-white  w-screen h-screen flex flex-col justify-between">
 
-      <section className="overflow-auto px-10 py-12">
+      <section className="overflow-auto px-14 py-12">
         <Formik
           // validationSchema={accountValidationSchema.concat(organizationValidationSchema)}
           initialValues={{}}
@@ -42,33 +42,103 @@ export const CreateCompanyStepForm: FC<CreateCompanyStepFormProps> = ({ onCancel
               </HorizontalSeparator>
 
 
-              <div className="grid grid-cols-2">
+              <div className="grid grid-cols-2 gap-x-2">
 
-                <ul className="col-span-1 px-6 py-8 w-full grid grid-cols-2 gap-x-8 gap-y-4">
-                  <li>
+                <ul className="col-span-1 px-6 py-8 w-full h-fit grid grid-cols-2 gap-x-8 gap-y-4">
+                  <li className="col-span-2">
                     <FieldWithErrorMessage
-                      name="name"
+                      name="organizationName"
                       type="text"
-                      placeholder="Ingresa tus nombres"
-                      label="Nombres"
+                      placeholder="Ingresa un nombre"
+                      label="Nombre de la empresa"
                     />
                   </li>
 
                   <li>
                     <FieldWithErrorMessage
-                      name="lastName"
+                      name="sii"
                       type="text"
-                      placeholder="Ingresa tus apellidos"
-                      label="Apellidos"
+                      placeholder="Ingresa tu numero"
+                      label="Número Resolución Sii"
                     />
                   </li>
 
                   <li>
                     <FieldWithErrorMessage
-                      name="rut"
+                      name="siiDate"
+                      type="date"
+                      placeholder="Selecciona una fecha"
+                      label="Fecha Resolución Sii"
+                    />
+                  </li>
+
+                  <li className="col-span-2">
+                    <FieldWithErrorMessage
+                      name="socialReason"
                       type="text"
-                      placeholder="Sin puntos ni guión"
-                      label="RUT"
+                      placeholder="Ingresa la razón social"
+                      label="Razón Social"
+                    />
+                  </li>
+
+
+                  <li className="col-span-2">
+                    <FieldWithErrorMessage
+                      name="giro"
+                      type="text"
+                      placeholder="Ingresa un giro"
+                      label="Giro"
+                    />
+                  </li>
+                </ul>
+
+                <ul className="col-span-1 px-6 py-8  w-full h-fit grid grid-cols-2 gap-x-8 gap-y-4">
+                  <li>
+                    <FieldWithErrorMessage
+                      name="rutCompany"
+                      type="text"
+                      placeholder="Ingresa un rut"
+                      label="Rut Empresa"
+                    />
+                  </li>
+
+                  <li>
+                    <FieldWithErrorMessage
+                      name="iatCode"
+                      type="text"
+                      placeholder="Ingresa un código"
+                      label="Código IATA"
+                    />
+                  </li>
+
+                  <li>
+                    <label className="input-label" htmlFor="electronicInvoice">Afecto Sii Factura Electrónica</label>
+                    <Field
+                      id="electronicInvoice"
+                      name="electronicInvoice"
+                      as="select"
+                      placeholder="Selecciona una opción"
+                      className="input-primary"
+                    >
+                      <option value="red">Red</option>
+                      <option value="green">Green</option>
+                      <option value="blue">Blue</option>
+                    </Field>
+                    <div className="h-4">
+                      <ErrorMessage name="electronicInvoice">
+                        {(msg) => (
+                          <p className="text-red-vlg-500">{msg}</p>
+                        )}
+                      </ErrorMessage>
+                    </div>
+                  </li>
+
+                  <li className="col-span-2">
+                    <FieldWithErrorMessage
+                      name="address"
+                      type="text"
+                      placeholder="Ingresa una dirección"
+                      label="Dirección"
                     />
                   </li>
 
@@ -76,108 +146,21 @@ export const CreateCompanyStepForm: FC<CreateCompanyStepFormProps> = ({ onCancel
                     <FieldWithErrorMessage
                       name="email"
                       type="email"
-                      placeholder="Ingresa tu correo"
+                      placeholder="Ingresa un correo"
                       label="Correo"
                     />
                   </li>
 
                   <li>
                     <FieldWithErrorMessage
-                      name="password"
+                      name="phone"
                       type="password"
-                      placeholder="Ingresa tu contraseña"
-                      label="Contraseña"
+                      placeholder="Ingresa un teléfono"
+                      label="Teléfono"
                     />
-                  </li>
-
-                  <li>
-                    <FieldWithErrorMessage
-                      name="rePassword"
-                      type="password"
-                      placeholder="Repite tu contraseña"
-                      label="Confirmar contraseña"
-                    />
-                  </li>
-
-                  <li className="mt-4 col-span-2 border-t-2 border-gray-vlg-200 pt-6">
-                    <FieldWithErrorMessage
-                      name="organizationName"
-                      type="text"
-                      placeholder="Ingresa un nombre"
-                      label="A qué organización perteneces?"
-                    />
-
                   </li>
                 </ul>
-
-                <ul className="px-6 py-8 w-full grid grid-cols-2 gap-x-8 gap-y-4">
-                  <li>
-                    <FieldWithErrorMessage
-                      name="name"
-                      type="text"
-                      placeholder="Ingresa tus nombres"
-                      label="Nombres"
-                    />
-                  </li>
-
-                  <li>
-                    <FieldWithErrorMessage
-                      name="lastName"
-                      type="text"
-                      placeholder="Ingresa tus apellidos"
-                      label="Apellidos"
-                    />
-                  </li>
-
-                  <li>
-                    <FieldWithErrorMessage
-                      name="rut"
-                      type="text"
-                      placeholder="Sin puntos ni guión"
-                      label="RUT"
-                    />
-                  </li>
-
-                  <li>
-                    <FieldWithErrorMessage
-                      name="email"
-                      type="email"
-                      placeholder="Ingresa tu correo"
-                      label="Correo"
-                    />
-                  </li>
-
-                  <li>
-                    <FieldWithErrorMessage
-                      name="password"
-                      type="password"
-                      placeholder="Ingresa tu contraseña"
-                      label="Contraseña"
-                    />
-                  </li>
-
-                  <li>
-                    <FieldWithErrorMessage
-                      name="rePassword"
-                      type="password"
-                      placeholder="Repite tu contraseña"
-                      label="Confirmar contraseña"
-                    />
-                  </li>
-
-                  <li className="mt-4 col-span-2 border-t-2 border-gray-vlg-200 pt-6">
-                    <FieldWithErrorMessage
-                      name="organizationName"
-                      type="text"
-                      placeholder="Ingresa un nombre"
-                      label="A qué organización perteneces?"
-                    />
-
-                  </li>
-                </ul>
-
               </div>
-
 
               <HorizontalSeparator direction="down" />
             </Form>
@@ -186,12 +169,12 @@ export const CreateCompanyStepForm: FC<CreateCompanyStepFormProps> = ({ onCancel
       </section>
 
 
-      <div className="flex justify-end gap-8 p-10 border-t border-gray-vlg-200">
-        <button className="btn-light w-44" onClick={onCancelar}>
+      <div className="flex justify-end gap-6 px-14 py-8 border-t border-gray-vlg-200">
+        <button className="btn-light w-40" onClick={onCancelar}>
           Cancelar
         </button>
 
-        <button className="btn-primary w-44">
+        <button className="btn-primary w-40">
           Continuar
         </button>
       </div>
