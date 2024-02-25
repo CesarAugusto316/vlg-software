@@ -9,11 +9,11 @@ import { HorizontalSeparator } from './HorizontalSeparator';
 interface CreateSectionProps {
   title: string;
   subtitle: string;
-  btn1Text?: string;
-  btn2Text: string;
+  btn1?: { text?: string; onClick?: () => void };
+  btn2: { text?: string; onClick?: () => void };
 }
 
-export const CreateSection: FC<CreateSectionProps> = ({ btn2Text, subtitle, title, btn1Text }) => {
+export const CreateSection: FC<CreateSectionProps> = ({ btn2, subtitle, title, btn1 }) => {
   return (
     <div>
       <HorizontalSeparator direction="up">
@@ -24,9 +24,14 @@ export const CreateSection: FC<CreateSectionProps> = ({ btn2Text, subtitle, titl
 
         <div>
           <If
-            condition={btn1Text}
+            condition={btn1?.text}
             render={(
-              <button type="button" className="btn-primary">{btn1Text}</button>
+              <button
+                type="button"
+                onClick={btn1?.onClick}
+                className="btn-primary">
+                {btn1?.text}
+              </button>
             )}
           />
         </div>
@@ -42,9 +47,9 @@ export const CreateSection: FC<CreateSectionProps> = ({ btn2Text, subtitle, titl
         </div>
 
         <div>
-          <button type="button" className="btn-primary">
+          <button onClick={btn2.onClick} type="button" className="btn-primary">
             <FontAwesomeIcon size="lg" icon={faPlus} />
-            <span>{btn2Text}</span>
+            <span>{btn2.text}</span>
           </button>
         </div>
       </div>

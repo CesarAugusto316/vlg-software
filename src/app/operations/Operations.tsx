@@ -8,7 +8,7 @@ export const Operations: FC = () => {
       <CreateSection
         title="Operaciones"
         subtitle="Aquí se muestran todas las operaciones"
-        btn2Text="Crear Empresa"
+        btn2={{ text: 'Crear Operación', onClick: () => console.log('click') }}
       />
     </div>
   );
